@@ -22,6 +22,8 @@ interface Authenticator {
 
     suspend fun loginWithCredentials(account: GoogleSignInAccount): AuthResult
 
+    fun signOut()
+
     /**
      * Returns livedata that returns boolean indicator whether the user
      * is signed in or NOT.

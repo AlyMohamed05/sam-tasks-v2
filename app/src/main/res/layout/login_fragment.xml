@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="authViewModel"
+            type="com.example.samtasks.ui.activities.auth.AuthViewModel" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,7 +50,8 @@
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:lines="1"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={authViewModel.loginEmail}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +71,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={authViewModel.loginPassword}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,6 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_button_top_margin"
+            android:onClick="@{() -> authViewModel.login()}"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/continue_with_google_top_margin"
             android:backgroundTint="@color/google_button_color"
+            android:onClick="@{() -> authViewModel.continueWithGoogle()}"
             android:text="@string/google_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,6 +147,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/continue_with_no_account_top_margin"
+            android:onClick="@{()->authViewModel.continueWithoutLogin()}"
             android:text="@string/no_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -4,6 +4,7 @@
 
     <!--    Google Sign in-->
     <string name="web_client_id">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
+    <string name="failed_login_with_google">Failed to login</string>
 
     <!--    Login Fragment-->
     <string name="login">Login</string>
@@ -18,5 +19,10 @@
     <string name="signup">Sign-up</string>
     <string name="name_hint">Name</string>
     <string name="back">Back to login</string>
+
+    <!--    Fields Errors-->
+    <string name="empty_field">Field Can\'t be empty</string>
+    <string name="email_not_valid">Please enter a valid email</string>
+    <string name="password_too_short">Password must be at least 8 chars</string>
 
 </resources>

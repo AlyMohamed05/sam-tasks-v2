@@ -96,6 +96,10 @@ class AuthenticatorImpl : Authenticator {
         }
     }
 
+    override fun signOut() {
+        firebaseAuth.signOut()
+    }
+
     override fun subscribeToSignInStatus() = signedInStatus
 
 }
