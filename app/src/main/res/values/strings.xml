@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="app_name">SAM Tasks</string>
+
+    <!--    Google Sign in-->
+    <string name="web_client_id">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
+
+    <!--    Login Fragment-->
+    <string name="login">Login</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="no_account">Don\'nt have account yet?</string>
+    <string name="google_login">Continue with Google</string>
+    <string name="no_login">Continue without login</string>
+
+    <!--    Signup Fragment-->
+    <string name="signup">Sign-up</string>
+    <string name="name_hint">Name</string>
+    <string name="back">Back to login</string>
+
+</resources>

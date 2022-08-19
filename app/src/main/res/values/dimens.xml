@@ -1,0 +1,23 @@
+<resources>
+
+    <!--    Authentication Activity Dimensions-->
+    <dimen name="auth_screen_guideline_percentage">0.3</dimen>
+    <dimen name="auth_title_top_margin">50dp</dimen>
+    <dimen name="auth_title_start_margin">30dp</dimen>
+    <dimen name="auth_edit_top_margin">18dp</dimen>
+    <dimen name="auth_edit_horizontal_margin">30dp</dimen>
+    <dimen name="auth_button_horizontal_margin">12dp</dimen>
+
+    <!--    Login Fragment-->
+    <dimen name="forgot_password_top_margin">10dp</dimen>
+    <dimen name="login_button_top_margin">16dp</dimen>
+    <dimen name="sign_up_text_button_top_margin">20dp</dimen>
+    <dimen name="divider_top_margin">30dp</dimen>
+    <dimen name="continue_with_google_top_margin">6dp</dimen>
+    <dimen name="continue_with_no_account_top_margin">6dp</dimen>
+
+    <!--    Signup Fragment-->
+    <dimen name="signup_button_top_margin">50dp</dimen>
+    <dimen name="back_button_top_margin">18dp</dimen>
+
+</resources>

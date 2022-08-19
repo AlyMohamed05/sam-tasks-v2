@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1092810453132",
+    "project_id": "sam-tasks-fe227",
+    "storage_bucket": "sam-tasks-fe227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092810453132:android:951958968d7deefdbfcba9",
+        "android_client_info": {
+          "package_name": "com.example.samtasks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092810453132-j7u1qec9i1k00e5rs60ruvfrbdqquqp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.samtasks",
+            "certificate_hash": "59ac9564d993130915300e8ddd2929f6d5811037"
+          }
+        },
+        {
+          "client_id": "1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuemgg25YGkemrSpEym0uJxpUCzGpVV6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
