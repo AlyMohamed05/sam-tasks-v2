@@ -2,6 +2,10 @@
 
     <string name="app_name">SAM Tasks</string>
 
+    <!--    Shared Pref Keys-->
+    <string name="shared_pref_name">Sam_Preferences</string>
+    <string name="continue_without_login">continueWithoutLogin</string>
+
     <!--    Google Sign in-->
     <string name="web_client_id">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
     <string name="failed_login_with_google">Failed to login</string>

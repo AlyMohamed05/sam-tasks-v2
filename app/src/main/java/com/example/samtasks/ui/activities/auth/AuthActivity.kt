@@ -1,11 +1,13 @@
 package com.example.samtasks.ui.activities.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.samtasks.R
+import com.example.samtasks.ui.activities.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -56,6 +58,21 @@ class AuthActivity : AppCompatActivity() {
                     signInWithGoogle()
                 }
             }
+
+        authViewModel.continueWithoutLogin.observe(this) { continueWithoutLogin ->
+            if (continueWithoutLogin) {
+                val pref = getSharedPreferences(getString(R.string.shared_pref_name), MODE_PRIVATE)
+                pref.edit().run {
+                    putBoolean(getString(R.string.continue_without_login), true)
+                    apply()
+                    Intent(this@AuthActivity, HomeActivity::class.java).also {
+                        it.putExtra("no_splash",true)   // No Need to splash.
+                        startActivity(it)
+                        finish()
+                    }
+                }
+            }
+        }
         authViewModel.resetPassword
             .observe(this) { shouldRequestPasswordReset ->
                 if (shouldRequestPasswordReset) {
@@ -70,8 +87,8 @@ class AuthActivity : AppCompatActivity() {
             }
 
         authViewModel.authEvents
-            .observe(this) {event ->
-                if(event != AuthEvents.EMPTY) {
+            .observe(this) { event ->
+                if (event != AuthEvents.EMPTY) {
                     authViewModel.clearAuthEvent()
                     showEventMessage(event)
                 }
