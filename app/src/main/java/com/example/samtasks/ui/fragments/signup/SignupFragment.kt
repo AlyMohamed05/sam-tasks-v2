@@ -46,24 +46,24 @@ class SignupFragment : Fragment() {
         observe()
     }
 
-    private fun initClickListeners(){
+    private fun initClickListeners() {
         binding.backTextButton.setOnClickListener {
             navController.navigateUp()
         }
     }
 
     private fun observe() {
-        authViewModel.signUpNameError.observe(
-            viewLifecycleOwner,
-            Observer { binding.nameEdit.errorMessage(it) }
-        )
-        authViewModel.signUpEmailError.observe(
-            viewLifecycleOwner,
-            Observer { binding.emailEdit.errorMessage(it) }
-        )
-        authViewModel.signUpPasswordError.observe(
-            viewLifecycleOwner,
-            Observer { binding.passwordEdit.errorMessage(it) }
-        )
+        authViewModel.signUpNameError
+            .observe(viewLifecycleOwner) {
+                binding.nameEdit.errorMessage(it)
+            }
+        authViewModel.signUpEmailError
+            .observe(viewLifecycleOwner) {
+                binding.emailEdit.errorMessage(it)
+            }
+        authViewModel.signUpPasswordError
+            .observe(viewLifecycleOwner) {
+                binding.passwordEdit.errorMessage(it)
+            }
     }
 }

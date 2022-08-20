@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.samtasks.R
+import com.example.samtasks.auth.AuthResult
 import com.example.samtasks.auth.Authenticator
 import com.example.samtasks.ui.fragments.login.LoginFormWithValidation
 import com.example.samtasks.ui.fragments.login.LoginFormWithValidationImpl
@@ -22,9 +24,17 @@ class AuthViewModel @Inject constructor(
     LoginFormWithValidation by LoginFormWithValidationImpl(),
     SignupFormWithValidation by SignUPFormWithValidationImpl() {
 
+    private val _authEvents = MutableLiveData(AuthEvents.EMPTY)
+    val authEvents: LiveData<AuthEvents>
+        get() = _authEvents
+
     private val _requestGoogleSignIn = MutableLiveData(false)
     val requestGoogleSignIn: LiveData<Boolean>
         get() = _requestGoogleSignIn
+
+    private val _resetPassword = MutableLiveData(false)
+    val resetPassword: LiveData<Boolean>
+        get() = _resetPassword
 
     fun login() {
         if (!validateLoginCredentials()) {
@@ -46,7 +56,7 @@ class AuthViewModel @Inject constructor(
      * then the activity calls this function with the account as a parameter
      * to continue sign in with google flow.
      */
-    fun signInWithGoogleAccount(account: GoogleSignInAccount){
+    fun signInWithGoogleAccount(account: GoogleSignInAccount) {
         viewModelScope.launch {
             authenticator.loginWithCredentials(account)
         }
@@ -54,6 +64,19 @@ class AuthViewModel @Inject constructor(
 
     fun continueWithoutLogin() {
 
+    }
+
+    fun requestEmailToResetPassword() {
+        _resetPassword.value = true
+    }
+
+    fun resetPassword(email: String) {
+        viewModelScope.launch {
+            val resetPasswordResponse = authenticator.resetPassword(email)
+            if(resetPasswordResponse == AuthResult.SUCCESS){
+                _authEvents.value = AuthEvents.SENT_RESET_PASSWORD_EMAIL
+            }
+        }
     }
 
     fun signUP() {
@@ -74,7 +97,20 @@ class AuthViewModel @Inject constructor(
      * Should be called by requestGoogleSignIn observers to reset and confirm
      * that request is being handled.
      */
-    fun resetGoogleSignInRequest(){
+    fun resetGoogleSignInRequest() {
         _requestGoogleSignIn.value = false
     }
+
+    fun resetPasswordResetRequest() {
+        _resetPassword.value = false
+    }
+
+    fun clearAuthEvent(){
+        _authEvents.value = AuthEvents.EMPTY
+    }
+}
+
+enum class AuthEvents(val resourceCode: Int){
+    EMPTY(Int.MIN_VALUE),
+    SENT_RESET_PASSWORD_EMAIL(R.string.sent_reset_email)
 }

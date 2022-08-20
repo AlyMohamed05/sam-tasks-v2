@@ -10,7 +10,7 @@ import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
-import java.lang.Exception
+import kotlin.Exception
 
 class AuthenticatorImpl : Authenticator {
 
@@ -92,6 +92,16 @@ class AuthenticatorImpl : Authenticator {
             }
         } catch (e: Exception) {
             Timber.d(e)
+            AuthResult.UNKNOWN_ERROR
+        }
+    }
+
+    override suspend fun resetPassword(email: String): AuthResult {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            AuthResult.SUCCESS
+        } catch (exception: Exception) {
+            Timber.d(exception)
             AuthResult.UNKNOWN_ERROR
         }
     }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.example.samtasks.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -50,14 +49,42 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun observe() {
-        authViewModel.requestGoogleSignIn.observe(
-            this,
-            Observer { shouldSignInWithGoogle ->
+        authViewModel.requestGoogleSignIn
+            .observe(this) { shouldSignInWithGoogle ->
                 if (shouldSignInWithGoogle) {
                     authViewModel.resetGoogleSignInRequest()
                     signInWithGoogle()
                 }
             }
-        )
+        authViewModel.resetPassword
+            .observe(this) { shouldRequestPasswordReset ->
+                if (shouldRequestPasswordReset) {
+                    authViewModel.resetPasswordResetRequest()
+                    ResetPasswordFragment().apply {
+                        setResetPasswordCallback { email ->
+                            authViewModel.resetPassword(email)
+                        }
+                        show(supportFragmentManager, "ResetPasswordFragment")
+                    }
+                }
+            }
+
+        authViewModel.authEvents
+            .observe(this) {event ->
+                if(event != AuthEvents.EMPTY) {
+                    authViewModel.clearAuthEvent()
+                    showEventMessage(event)
+                }
+            }
+    }
+
+    private fun showEventMessage(event: AuthEvents) {
+        val message: String? = when (event) {
+            AuthEvents.SENT_RESET_PASSWORD_EMAIL -> getString(event.resourceCode)
+            else -> null
+        }
+        if (message != null) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

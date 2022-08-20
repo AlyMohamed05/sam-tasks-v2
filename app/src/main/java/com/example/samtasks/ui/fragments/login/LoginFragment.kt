@@ -53,13 +53,13 @@ class LoginFragment : Fragment() {
     }
 
     private fun observe() {
-        authViewModel.loginEmailError.observe(
-            viewLifecycleOwner,
-            Observer { binding.emailEdit.errorMessage(it) }
-        )
-        authViewModel.loginPasswordError.observe(
-            viewLifecycleOwner,
-            Observer { binding.passwordEdit.errorMessage(it) }
-        )
+        authViewModel.loginEmailError
+            .observe(viewLifecycleOwner) {
+                binding.emailEdit.errorMessage(it)
+            }
+        authViewModel.loginPasswordError
+            .observe(viewLifecycleOwner) {
+                binding.passwordEdit.errorMessage(it)
+            }
     }
 }

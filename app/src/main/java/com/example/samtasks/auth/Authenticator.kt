@@ -22,6 +22,8 @@ interface Authenticator {
 
     suspend fun loginWithCredentials(account: GoogleSignInAccount): AuthResult
 
+    suspend fun resetPassword(email: String): AuthResult
+
     fun signOut()
 
     /**
