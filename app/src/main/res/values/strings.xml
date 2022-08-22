@@ -34,4 +34,9 @@
     <string name="email_not_valid">Please enter a valid email</string>
     <string name="password_too_short">Password must be at least 8 chars</string>
 
+    <!--    Bottom Nav Bar Items Name-->
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="location">Location</string>
+
 </resources>

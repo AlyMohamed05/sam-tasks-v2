@@ -10,24 +10,26 @@ import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.splashscreen.SplashScreenViewProvider
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.ActivityHomeBinding
 import com.example.samtasks.ui.activities.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.lang.IllegalStateException
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var navController: NavController
 
     private val homeViewModel: HomeViewModel by viewModels()
 
     // Will be true only if user is logged in or he choose to continue
     // without login before.
     private var stayInHome = false
-
     private var needAuthentication = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,23 +37,7 @@ class HomeActivity : AppCompatActivity() {
         if (intent.getBooleanExtra(getString(R.string.no_splash_screen), false)) {
             setTheme(R.style.Theme_SAMTasks)
         } else {
-            installSplashScreen().apply {
-                setKeepOnScreenCondition {
-                    keepSplashScreen()
-                }
-                setOnExitAnimationListener {
-                    if (stayInHome) {
-                        animateSplashScreen(it)
-                    } else if (needAuthentication) {
-                        Intent(this@HomeActivity, AuthActivity::class.java).apply {
-                            startActivity(this)
-                        }
-                        this@HomeActivity.finish()
-                    } else {
-                        throw IllegalStateException()
-                    }
-                }
-            }
+            setupSplashScreen()
         }
         continueOrAuthenticate()
         if (needAuthentication) {
@@ -59,6 +45,11 @@ class HomeActivity : AppCompatActivity() {
             return
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+
+        // Setup Bottom Navigation Bar
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_nav_host_fragment)
+        navController = navHostFragment!!.findNavController()
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
     /**
@@ -77,8 +68,26 @@ class HomeActivity : AppCompatActivity() {
         } else {
             needAuthentication = true
         }
-        Timber.d("stayHome : $stayInHome")
-        Timber.d("need authentication : $needAuthentication")
+    }
+
+    private fun setupSplashScreen() {
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                keepSplashScreen()
+            }
+            setOnExitAnimationListener {
+                if (stayInHome) {
+                    animateSplashScreen(it)
+                } else if (needAuthentication) {
+                    Intent(this@HomeActivity, AuthActivity::class.java).apply {
+                        startActivity(this)
+                    }
+                    this@HomeActivity.finish()
+                } else {
+                    throw IllegalStateException()
+                }
+            }
+        }
     }
 
     private fun keepSplashScreen(): Boolean {
