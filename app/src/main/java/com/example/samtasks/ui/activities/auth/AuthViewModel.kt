@@ -28,6 +28,13 @@ class AuthViewModel @Inject constructor(
     val authEvents: LiveData<AuthEvents>
         get() = _authEvents
 
+    val signInStatus: LiveData<Boolean>
+        get() = authenticator.subscribeToSignInStatus()
+
+    private val _canContinueWithoutLogin = MutableLiveData(false)
+    val canContinueWithoutLogin: LiveData<Boolean>
+        get() = _canContinueWithoutLogin
+
     private val _requestGoogleSignIn = MutableLiveData(false)
     val requestGoogleSignIn: LiveData<Boolean>
         get() = _requestGoogleSignIn
@@ -63,7 +70,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun continueWithoutLogin() {
-
+        _canContinueWithoutLogin.value = true
     }
 
     fun requestEmailToResetPassword() {

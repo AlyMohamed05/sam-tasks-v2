@@ -17,12 +17,13 @@
 
         <activity
             android:name=".ui.activities.auth.AuthActivity"
+            android:theme="@style/Theme.SAMTasks"
             android:exported="false" />
 
         <activity
             android:name=".ui.activities.home.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.SAMTasks">
+            android:theme="@style/Theme.App.Splash">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

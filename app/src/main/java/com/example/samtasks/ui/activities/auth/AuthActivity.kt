@@ -1,11 +1,13 @@
 package com.example.samtasks.ui.activities.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.samtasks.R
+import com.example.samtasks.ui.activities.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -49,6 +51,12 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun observe() {
+        authViewModel.signInStatus.observe(this) { isSignedIn ->
+            if (isSignedIn) {
+                startHomeActivity()
+            }
+        }
+
         authViewModel.requestGoogleSignIn
             .observe(this) { shouldSignInWithGoogle ->
                 if (shouldSignInWithGoogle) {
@@ -56,6 +64,18 @@ class AuthActivity : AppCompatActivity() {
                     signInWithGoogle()
                 }
             }
+
+        authViewModel.canContinueWithoutLogin.observe(this) { continueWithoutLogin ->
+            if (continueWithoutLogin) {
+                getSharedPreferences(getString(R.string.shared_pref_name), MODE_PRIVATE)
+                    .edit().apply {
+                        putBoolean(getString(R.string.continue_without_login_key), true)
+                        apply()
+                        startHomeActivity()
+                    }
+            }
+        }
+
         authViewModel.resetPassword
             .observe(this) { shouldRequestPasswordReset ->
                 if (shouldRequestPasswordReset) {
@@ -70,8 +90,8 @@ class AuthActivity : AppCompatActivity() {
             }
 
         authViewModel.authEvents
-            .observe(this) {event ->
-                if(event != AuthEvents.EMPTY) {
+            .observe(this) { event ->
+                if (event != AuthEvents.EMPTY) {
                     authViewModel.clearAuthEvent()
                     showEventMessage(event)
                 }
@@ -86,5 +106,13 @@ class AuthActivity : AppCompatActivity() {
         if (message != null) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun startHomeActivity() {
+        Intent(this, HomeActivity::class.java).apply {
+            putExtra(getString(R.string.no_splash_screen), true)
+            startActivity(this)
+        }
+        finish()
     }
 }
