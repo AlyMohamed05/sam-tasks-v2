@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">SAM Tasks</string>
+    <string name="android">Android</string>
 
     <!--    Google Sign in-->
     <string name="web_client_id" tools:ignore="TypographyDashes">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>

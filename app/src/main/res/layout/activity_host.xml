@@ -7,12 +7,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.home.HomeActivity">
+        tools:context=".ui.activities.host.HostActivity">
 
         <TextView
+            android:id="@+id/android_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Android"
+            android:text="@string/android"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
