@@ -31,4 +31,16 @@
 
     </style>
 
+    <style name="date_indicator">
+
+        <item name="android:layout_height">@dimen/date_indicator_height</item>
+        <item name="android:layout_width">@dimen/date_indicator_width</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:translationY">25dp</item>
+        <item name="android:background">@drawable/circle_shape</item>
+        <item name="android:layout_marginStart">@dimen/date_indicator_margin</item>
+
+    </style>
+
 </resources>

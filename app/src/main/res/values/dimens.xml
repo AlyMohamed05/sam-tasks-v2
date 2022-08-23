@@ -20,4 +20,19 @@
     <dimen name="signup_button_top_margin">50dp</dimen>
     <dimen name="back_button_top_margin">18dp</dimen>
 
+    <!--    Home Fragment-->
+    <dimen name="greeting_text_margin">10dp</dimen>
+    <dimen name="floating_button_margin">16dp</dimen>
+    <dimen name="date_indicator_height">50dp</dimen>
+    <dimen name="date_indicator_width">50dp</dimen>
+    <dimen name="date_indicator_margin">10dp</dimen>
+
+    <!--    _Todo Item Dimensions-->
+    <dimen name="time_start_margin">@dimen/date_indicator_margin</dimen>
+    <!--    Top margin = radius of date indicator-->
+    <dimen name="time_top_margin">25dp</dimen>
+    <dimen name="todo_indicator_width">@dimen/date_indicator_width</dimen>
+    <dimen name="todo_indicator_height">@dimen/date_indicator_height</dimen>
+    <!--    This margin has to set _todo indicator under date indicator-->
+    <dimen name="todo_indicator_start_margin">70dp</dimen>
 </resources>

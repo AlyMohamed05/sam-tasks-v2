@@ -49,6 +49,13 @@ class HomeActivity : AppCompatActivity() {
         // Setup Bottom Navigation Bar
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_nav_host_fragment)
         navController = navHostFragment!!.findNavController()
+        navController.addOnDestinationChangedListener{ _ , destination , _ ->
+            if(destination.id == R.id.createTaskFragment){
+                binding.bottomNavigationView.visibility = View.GONE
+            }else{
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
         binding.bottomNavigationView.setupWithNavController(navController)
     }
 

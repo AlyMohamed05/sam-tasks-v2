@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.samtasks.ui.fragments.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.samtasks.ui.fragments.calendar.CalendarFragment"
@@ -20,4 +24,9 @@
         android:name="com.example.samtasks.ui.fragments.location.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/location_fragment" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        tools:layout="@layout/create_task_fragment"
+        android:name="com.example.samtasks.ui.fragments.create.CreateTaskFragment"
+        android:label="CreateTaskFragment" />
 </navigation>

@@ -39,4 +39,8 @@
     <string name="calendar">Calendar</string>
     <string name="location">Location</string>
 
+    <!--    Home Fragment-->
+    <string name="greeting_message">Hello %s :)\nThis is your todo list</string>
+    <string name="new_todo_description">Creates a new todo</string>
+
 </resources>

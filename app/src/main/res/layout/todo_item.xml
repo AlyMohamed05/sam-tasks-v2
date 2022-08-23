@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        
+        <variable
+            name="task"
+            type="com.example.samtasks.data.models.Task" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/time_start_margin"
+            android:layout_marginTop="@dimen/time_top_margin"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@{task.time}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="08:00" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/todo_indicator_width"
+            android:layout_height="@dimen/todo_indicator_height"
+            android:layout_marginStart="@dimen/todo_indicator_start_margin"
+            android:background="@drawable/circle_shape"
+            app:layout_constraintBottom_toBottomOf="@+id/date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/date_text" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@{task.title}"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/content_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="@{task.content}"
+            app:layout_constraintStart_toStartOf="@+id/title_text"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            tools:text="This is the content of the todo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

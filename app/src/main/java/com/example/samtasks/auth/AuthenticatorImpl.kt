@@ -3,7 +3,7 @@ package com.example.samtasks.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.samtasks.data.models.User
-import com.example.samtasks.utils.toUser
+import com.example.samtasks.data.models.toUser
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
