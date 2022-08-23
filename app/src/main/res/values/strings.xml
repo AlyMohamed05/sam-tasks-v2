@@ -1,46 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">SAM Tasks</string>
 
-    <!--    Shared Pref-->
-    <string name="shared_pref_name">SamPreferences</string>
-    <string name="continue_without_login_key">noLoginNeeded</string>
-
-    <!--    Intent Keys-->
-    <string name="no_splash_screen">noSplash</string>
-
     <!--    Google Sign in-->
-    <string name="web_client_id">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
-    <string name="failed_login_with_google">Failed to login</string>
+    <string name="web_client_id" tools:ignore="TypographyDashes">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
 
-    <!--    Login Fragment-->
-    <string name="login">Login</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="no_account">Don\'nt have account yet?</string>
-    <string name="google_login">Continue with Google</string>
-    <string name="no_login">Continue without login</string>
-    <string name="reset_password">Reset</string>
-    <string name="sent_reset_email">Email sent</string>
-
-    <!--    Signup Fragment-->
-    <string name="signup">Sign-up</string>
-    <string name="name_hint">Name</string>
-    <string name="back">Back to login</string>
-
-    <!--    Fields Errors-->
-    <string name="empty_field">Field Can\'t be empty</string>
-    <string name="email_not_valid">Please enter a valid email</string>
-    <string name="password_too_short">Password must be at least 8 chars</string>
-
-    <!--    Bottom Nav Bar Items Name-->
-    <string name="home">Home</string>
-    <string name="calendar">Calendar</string>
-    <string name="location">Location</string>
-
-    <!--    Home Fragment-->
-    <string name="greeting_message">Hello %s :)\nThis is your todo list</string>
-    <string name="new_todo_description">Creates a new todo</string>
 
 </resources>
