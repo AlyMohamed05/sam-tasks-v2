@@ -7,9 +7,11 @@
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/circle_shape.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_calendar.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_home.xml" value="0.1555" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_location.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_new.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_todo_foreground.xml" value="0.1995" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/sam_red_gradient.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/activity_auth.xml" value="0.1875" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/activity_home.xml" value="0.1875" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/activity_host.xml" value="0.1875" />
@@ -22,6 +24,7 @@
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/login_fragment.xml" value="0.18671875" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/signup_fragment.xml" value="0.2" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/todo_item.xml" value="0.18671875" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/layout/welcome_fragment.xml" value="0.18671875" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.18671875" />
       </map>
     </option>
