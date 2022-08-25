@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.WelcomeFragmentBinding
 import com.example.samtasks.ui.activities.auth.AuthActivity
@@ -42,10 +43,8 @@ class WelcomeFragment : Fragment() {
                 continueWithoutLogin()
             }
             loginButton.setOnClickListener {
-                Intent(activity, AuthActivity::class.java).apply {
-                    startActivity(this)
-                    activity?.finish()
-                }
+                findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToAuthActivity())
+                activity?.finish()
             }
         }
     }
@@ -62,7 +61,7 @@ class WelcomeFragment : Fragment() {
                 putBoolean(getString(R.string.continue_without_login_key), true)
                 apply()
             }
-            // TODO : Navigate to home fragment
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment())
         }
     }
 
