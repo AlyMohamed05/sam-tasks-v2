@@ -6,5 +6,14 @@
     <!--    Google Sign in-->
     <string name="web_client_id" tools:ignore="TypographyDashes">1092810453132-5k6l3jk0dd2k3d1hnfuq8tut354r8ttc.apps.googleusercontent.com</string>
 
+    <!--    Shared Preferences-->
+    <string name="shared_preferences_name">sam_preferences</string>
+    <string name="continue_without_login_key">continue_without_login</string>
+
+    <!--    Global-->
+    <string name="login">Login</string>
+
+    <!--    Welcome Fragment-->
+    <string name="continue_without_login_text">Continue without login</string>
 
 </resources>
