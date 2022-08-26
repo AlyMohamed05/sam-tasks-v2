@@ -23,6 +23,7 @@
     <!--    Auth Activity-->
     <string name="forgot_password_text">Forgot your password?</string>
     <string name="google_sign_in_text">Sign in with Google</string>
+    <string name="reset">Reset</string>
 
     <!--    Authentication Error messages-->
     <string name="empty_field">This field can\'t be empty</string>

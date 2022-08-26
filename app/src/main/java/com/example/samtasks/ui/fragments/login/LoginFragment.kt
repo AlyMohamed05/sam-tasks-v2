@@ -69,7 +69,16 @@ class LoginFragment : Fragment() {
                 navController.navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
             }
             googleButton.setOnClickListener { signInByGoogle() }
+            forgotPasswordTextButton.setOnClickListener { showResetPasswordDialog() }
         }
+    }
+
+    private fun showResetPasswordDialog() {
+        val resetPasswordDialog = ResetPasswordDialog()
+        resetPasswordDialog.setCallback { email ->
+            loginViewModel.sendResetPasswordEmail(email)
+        }
+        resetPasswordDialog.show(childFragmentManager, "Reset Password")
     }
 
     private fun initGoogleSignInClient() {

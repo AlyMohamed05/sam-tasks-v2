@@ -53,6 +53,13 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch { authenticator.signInWithGoogleAccount(account) }
     }
 
+    fun sendResetPasswordEmail(email: String){
+        viewModelScope.launch {
+            val result = authenticator.requestPasswordReset(email)
+            // TODO : Handle status of response to show if email is sent or not
+        }
+    }
+
     /**
      * LOCAL VALIDATION.
      * Validates email and password and returns true if valid and false if

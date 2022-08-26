@@ -37,8 +37,8 @@ class AuthenticatorImpl : Authenticator {
             if (firebaseUser == null) LoginResponse.UNHANDLED_ERROR else LoginResponse.SUCCEEDED
         } catch (firebaseException: FirebaseException) {
             when (firebaseException) {
-                is FirebaseAuthInvalidUserException -> LoginResponse.WRONG_PASSWORD
-                is FirebaseAuthInvalidCredentialsException -> LoginResponse.WRONG_CREDENTIALS
+                is FirebaseAuthInvalidUserException -> LoginResponse.WRONG_CREDENTIALS
+                is FirebaseAuthInvalidCredentialsException -> LoginResponse.WRONG_PASSWORD
                 is FirebaseNetworkException -> LoginResponse.NETWORK_ERROR
                 else -> {
                     Timber.d(firebaseException)
