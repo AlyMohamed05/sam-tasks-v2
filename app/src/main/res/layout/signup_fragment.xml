@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.samtasks.ui.fragments.signup.SignupViewModel" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -34,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/auth_title_bottom_margin"
                 android:hint="@string/name"
+                app:errorValue="@{viewModel.nameError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -41,7 +46,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="@={viewModel.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
+                app:errorValue="@{viewModel.emailError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_edit">
@@ -58,7 +65,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:singleLine="true" />
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:text="@={viewModel.email}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +77,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
+                app:endIconMode="password_toggle"
+                app:errorValue="@{viewModel.passwordError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email_edit">
@@ -75,7 +86,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:singleLine="true" />
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,9 +96,10 @@
                 android:id="@+id/signup_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/signup"
-                android:backgroundTint="#FFC24646"
                 android:layout_marginTop="@dimen/signup_button_top_margin"
+                android:backgroundTint="#FFC24646"
+                android:onClick="@{() -> viewModel.signup()}"
+                android:text="@string/signup"
                 app:layout_constraintEnd_toEndOf="@+id/password_edit"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit" />
 

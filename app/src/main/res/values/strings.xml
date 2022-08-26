@@ -24,4 +24,10 @@
     <string name="forgot_password_text">Forgot your password?</string>
     <string name="google_sign_in_text">Sign in with Google</string>
 
+    <!--    Authentication Error messages-->
+    <string name="empty_field">This field can\'t be empty</string>
+    <string name="email_not_valid">Enter a valid email</string>
+    <string name="short_password">Password must be at least 8 chars</string>
+    <string name="wrong_password">check your password</string>
+    <string name="email_exists">Email already exists</string>
 </resources>
