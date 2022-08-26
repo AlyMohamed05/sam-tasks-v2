@@ -31,4 +31,8 @@
     <string name="short_password">Password must be at least 8 chars</string>
     <string name="wrong_password">check your password</string>
     <string name="email_exists">Email already exists</string>
+
+    <!--    Authentication Ui Messages-->
+    <string name="sent">Email sent</string>
+    <string name="failed_to_reset">Failed to sent Email</string>
 </resources>

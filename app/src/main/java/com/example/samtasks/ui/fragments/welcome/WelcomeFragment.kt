@@ -44,7 +44,7 @@ class WelcomeFragment : Fragment() {
             }
             loginButton.setOnClickListener {
                 findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToAuthActivity())
-                activity?.finish()
+                //activity?.finish()
             }
         }
     }

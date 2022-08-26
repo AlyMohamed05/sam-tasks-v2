@@ -1,5 +1,6 @@
 package com.example.samtasks.ui.fragments.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,11 +24,6 @@ class LoginViewModel @Inject constructor(
     val email = MutableLiveData("")
     val password = MutableLiveData("")
 
-    private val emailValue: String
-        get() = email.value!!
-    private val passwordValue: String
-        get() = password.value!!
-
     /**
      * Error messages that appears on input layout.
      * They might come from local validation or errors coming from
@@ -38,6 +34,16 @@ class LoginViewModel @Inject constructor(
      */
     val emailError = MutableLiveData<Int?>(null)
     val passwordError = MutableLiveData<Int?>(null)
+
+    private val _uiEvents = MutableLiveData<UiEvents>(UiEvents.NoValue)
+    val uiEvents: LiveData<UiEvents>
+        get() = _uiEvents
+
+    // Just to access values cleaner
+    private val emailValue: String
+        get() = email.value!!
+    private val passwordValue: String
+        get() = password.value!!
 
     fun login() {
         if (!validate()) {
@@ -53,11 +59,19 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch { authenticator.signInWithGoogleAccount(account) }
     }
 
-    fun sendResetPasswordEmail(email: String){
+    fun sendResetPasswordEmail(email: String) {
         viewModelScope.launch {
-            val result = authenticator.requestPasswordReset(email)
-            // TODO : Handle status of response to show if email is sent or not
+            val succeeded = authenticator.requestPasswordReset(email)
+            if(succeeded){
+                _uiEvents.value = UiEvents.ShowToast(R.string.sent)
+            }else{
+                _uiEvents.value = UiEvents.ShowToast(R.string.failed_to_reset)
+            }
         }
+    }
+
+    fun resetUiEvents(){
+        _uiEvents.value = UiEvents.NoValue
     }
 
     /**
@@ -104,4 +118,9 @@ class LoginViewModel @Inject constructor(
             else -> Timber.d("Unexpected error occurred")
         }
     }
+}
+
+sealed class UiEvents(val resId: Int?) {
+    class ShowToast(val stringId: Int) : UiEvents(stringId)
+    object NoValue : UiEvents(null)
 }

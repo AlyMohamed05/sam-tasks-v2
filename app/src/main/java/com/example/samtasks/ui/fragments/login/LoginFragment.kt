@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -61,6 +62,22 @@ class LoginFragment : Fragment() {
         navController = findNavController()
         initClickListeners()
         initGoogleSignInClient()
+        observe()
+    }
+
+    /**
+     * setup observers for events from login view model.
+     */
+    private fun observe() {
+        loginViewModel.uiEvents.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is UiEvents.ShowToast -> {
+                    loginViewModel.resetUiEvents()
+                    Toast.makeText(context, event.stringId, Toast.LENGTH_LONG).show()
+                }
+                UiEvents.NoValue -> {}
+            }
+        }
     }
 
     private fun initClickListeners() {
