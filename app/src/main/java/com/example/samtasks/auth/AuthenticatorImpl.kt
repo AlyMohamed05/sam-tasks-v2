@@ -2,6 +2,8 @@ package com.example.samtasks.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
@@ -46,6 +48,15 @@ class AuthenticatorImpl : Authenticator {
         } catch (exception: Exception) {
             Timber.d(exception)
             LoginResponse.UNKNOWN_ERROR
+        }
+    }
+
+    override suspend fun signInWithGoogleAccount(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        val response = firebaseAuth.signInWithCredential(credential).await()
+        firebaseUser = response.user
+        if (firebaseUser == null) {
+            Timber.d("Failed to login with google")
         }
     }
 

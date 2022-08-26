@@ -9,6 +9,7 @@ import com.example.samtasks.auth.LoginResponse
 import com.example.samtasks.utils.ValidationResult
 import com.example.samtasks.utils.validateAsEmail
 import com.example.samtasks.utils.validateAsPassword
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -46,6 +47,10 @@ class LoginViewModel @Inject constructor(
             val response = authenticator.login(emailValue, passwordValue)
             handleLoginResponse(response)
         }
+    }
+
+    fun signInWithGoogleAccount(account: GoogleSignInAccount) {
+        viewModelScope.launch { authenticator.signInWithGoogleAccount(account) }
     }
 
     /**

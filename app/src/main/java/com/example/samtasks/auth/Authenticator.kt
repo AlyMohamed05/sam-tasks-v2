@@ -3,6 +3,7 @@ package com.example.samtasks.auth
 import androidx.lifecycle.LiveData
 import com.example.samtasks.auth.LoginResponse.UNHANDLED_ERROR
 import com.example.samtasks.auth.LoginResponse.UNKNOWN_ERROR
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 interface Authenticator {
 
@@ -19,6 +20,8 @@ interface Authenticator {
         email: String,
         password: String
     ): SignUpResponse
+
+    suspend fun signInWithGoogleAccount(account: GoogleSignInAccount)
 
     /**
      * Returns true if the email is sent else FALSE.
