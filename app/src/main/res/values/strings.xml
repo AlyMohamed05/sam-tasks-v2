@@ -12,8 +12,16 @@
 
     <!--    Global-->
     <string name="login">Login</string>
+    <string name="signup">Sign-up</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 
     <!--    Welcome Fragment-->
     <string name="continue_without_login_text">Continue without login</string>
+
+    <!--    Auth Activity-->
+    <string name="forgot_password_text">Forgot your password?</string>
+    <string name="google_sign_in_text">Sign in with Google</string>
 
 </resources>

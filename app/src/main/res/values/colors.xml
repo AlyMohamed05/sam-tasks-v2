@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-
-    <color name="primaryColor">#679186</color>
-    <color name="primaryLightColor">#96c1b6</color>
-    <color name="primaryDarkColor">#3b6359</color>
-    <color name="secondaryColor">#ffebd3</color>
-    <color name="secondaryLightColor">#ffffff</color>
-    <color name="secondaryDarkColor">#ccb9a2</color>
-    <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#000000</color>
-
-    <color name="google_button_color">#FFE3E3E3</color>
-
+  <color name="primaryColor">#7b2a2a</color>
+  <color name="primaryLightColor">#ae5753</color>
+  <color name="primaryDarkColor">#4a0000</color>
+  <color name="secondaryColor">#eef5db</color>
+  <color name="secondaryLightColor">#ffffff</color>
+  <color name="secondaryDarkColor">#bcc2a9</color>
+  <color name="primaryTextColor">#ffffff</color>
+  <color name="secondaryTextColor">#000000</color>
 </resources>

@@ -7,4 +7,17 @@
     android:background="@drawable/sam_red_gradient"
     tools:context=".ui.activities.auth.AuthActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/form_height"
+        android:layout_marginHorizontal="@dimen/form_horizontal_margin"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/auth_nav_graph" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

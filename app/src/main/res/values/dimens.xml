@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Auth Activity-->
+    <dimen name="form_height">520dp</dimen>
+    <dimen name="form_horizontal_margin">10dp</dimen>
+    <dimen name="auth_title_top_margin">60dp</dimen>
+    <dimen name="auth_title_bottom_margin">30dp</dimen>
+    <dimen name="auth_title_start_margin">20dp</dimen>
+    <dimen name="login_button_top_margin">12dp</dimen>
+    <dimen name="signup_button_top_margin">16dp</dimen>
+    <dimen name="button_horizontal_margin">20dp</dimen>
+    <dimen name="sign_up_button_bottom_margin">70dp</dimen>
+    <dimen name="google_button_bottom_margin">8dp</dimen>
+
+</resources>
