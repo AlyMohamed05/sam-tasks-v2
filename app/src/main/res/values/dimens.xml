@@ -14,4 +14,7 @@
     <dimen name="google_button_top_margin">40dp</dimen>
     <dimen name="google_button_bottom_margin">8dp</dimen>
 
+    <!--    Home Fragment-->
+    <dimen name="fab_margin">12dp</dimen>
+
 </resources>

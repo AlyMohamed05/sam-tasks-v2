@@ -2,7 +2,6 @@ package com.example.samtasks.ui.activities.host
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
@@ -33,7 +32,6 @@ class HostActivity : AppCompatActivity() {
         navController = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment)!!
             .findNavController()
-        setDestinationListener()
         checkUserState()
     }
 
@@ -63,16 +61,4 @@ class HostActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Hide bottom nav bar in welcome fragment
-     */
-    private fun setDestinationListener() {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.welcomeFragment) {
-                binding.bottomNavBar.visibility = View.GONE
-            } else {
-                binding.bottomNavBar.visibility = View.VISIBLE
-            }
-        }
-    }
 }

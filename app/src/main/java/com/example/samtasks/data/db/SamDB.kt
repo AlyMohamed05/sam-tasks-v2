@@ -7,6 +7,7 @@ import com.example.samtasks.data.models.Task
 
 @Database(
     entities = [Task::class],
+    exportSchema = false,
     version = 1
 )
 abstract class SamDB : RoomDatabase() {

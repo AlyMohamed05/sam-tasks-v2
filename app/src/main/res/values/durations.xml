@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="home_create_animations_duration">375</integer>
+
+</resources>
