@@ -45,6 +45,12 @@
     <string name="night_greeting">Good Night %s</string>
 
     <!--    Create Task Fragment-->
+    <string name="back_button_description">Go back to home without saving task</string>
     <string name="done_fab_description">Confirms task creation and add it to database</string>
-
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="calender_button_description">Open date selector for editing task\'s date</string>
+    <string name="location_button_description">Opens map to select a location for the task, then a location will be sent if location settings is enabled and you reached to location</string>
+    <string name="time_button_description">Opens time editor to set a time for the task</string>
+    <string name="alarm_button_description">Opens alarm editor to set an alarm for this task</string>
 </resources>

@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/bottom_bar_card.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/card_shape.xml" value="0.1995" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/circle_shape.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_add.xml" value="0.1825" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_alarm.xml" value="0.1825" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_back.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_calendar.xml" value="0.1555" />
+        <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_clock.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_done.xml" value="0.1825" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_home.xml" value="0.1555" />
         <entry key="..\:/Users/asecu/AndroidStudioProjects/SAMTasks/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1825" />
