@@ -1,9 +1,6 @@
 package com.example.samtasks.ui.fragments.create_edit
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+import android.animation.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,12 +63,12 @@ class CreateTaskFragment : Fragment() {
         datePicker.show(childFragmentManager, "datePicker")
     }
 
-    fun showMapPicker(){
-        Toast.makeText(context,"Not Supported yet",Toast.LENGTH_LONG).show()
+    fun showMapPicker() {
+        Toast.makeText(context, "Not Supported yet", Toast.LENGTH_LONG).show()
     }
 
-    fun setAlarm(){
-        Toast.makeText(context,"Not Supported yet",Toast.LENGTH_LONG).show()
+    fun setAlarm() {
+        Toast.makeText(context, "Not Supported yet", Toast.LENGTH_LONG).show()
     }
 
     fun showTimePicker() {

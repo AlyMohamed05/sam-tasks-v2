@@ -14,7 +14,7 @@
         <action
             android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:exitAnim="@anim/scale_out"
+            app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
         <action
@@ -34,10 +34,10 @@
         <action
             android:id="@+id/action_homeFragment_to_createTaskFragment"
             app:destination="@id/createTaskFragment"
-            app:enterAnim="@anim/slide_in_from_bottom"
+            app:enterAnim="@anim/zoom_in_bottom_right"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out_to_bottom" />
+            app:popExitAnim="@anim/zoom_out_bottom_left" />
     </fragment>
 
     <activity

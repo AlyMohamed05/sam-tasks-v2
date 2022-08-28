@@ -60,68 +60,78 @@
             android:minHeight="60dp"
             android:scrollbars="vertical"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_bar_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_edit" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bottom_bar"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_bar_layout"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bottom_bar_card"
-                android:orientation="horizontal">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/bottom_bar_card"
+                tools:ignore="ContentDescription" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="18dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/calender_button_description"
-                    android:onClick="@{() -> fragment.showDatePicker()}"
-                    app:srcCompat="@drawable/ic_calendar" />
+            <ImageButton
+                android:id="@+id/calender_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/calender_button_description"
+                android:onClick="@{() -> fragment.showDatePicker()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_calendar" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/location_button_description"
-                    android:onClick="@{() -> fragment.showMapPicker()}"
-                    app:srcCompat="@drawable/ic_location" />
+            <ImageButton
+                android:id="@+id/location_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/location_button_description"
+                android:onClick="@{() -> fragment.showMapPicker()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/calender_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_location" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/time_button_description"
-                    android:onClick="@{() -> fragment.showTimePicker()}"
-                    app:srcCompat="@drawable/ic_clock" />
+            <ImageButton
+                android:id="@+id/time_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/time_button_description"
+                android:onClick="@{() -> fragment.showTimePicker()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/location_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_clock" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/alarm_button_description"
-                    android:onClick="@{() -> fragment.setAlarm()}"
-                    app:srcCompat="@drawable/ic_alarm" />
+            <ImageButton
+                android:id="@+id/alarm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/alarm_button_description"
+                android:onClick="@{() -> fragment.setAlarm()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/time_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_alarm" />
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/create_fab"
@@ -132,7 +142,7 @@
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/done_fab_description"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+            app:layout_constraintBottom_toTopOf="@id/bottom_bar_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_done"
             tools:visibility="visible" />
