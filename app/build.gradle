@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -22,6 +23,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 
     buildTypes {
@@ -86,6 +88,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 
     // Maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
     implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
 

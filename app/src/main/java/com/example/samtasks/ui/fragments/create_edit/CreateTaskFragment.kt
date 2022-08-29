@@ -13,8 +13,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.CreateTaskFragmentBinding
+import com.example.samtasks.ui.fragments.bottom_sheets.MapBottomSheet
 import com.example.samtasks.ui.fragments.datepicker.DatePickerFragment
 import com.example.samtasks.ui.fragments.timepicker.TimePickerFragment
+import com.example.samtasks.utils.animateIntoScreen
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import timber.log.Timber
@@ -64,7 +67,11 @@ class CreateTaskFragment : Fragment() {
     }
 
     fun showMapPicker() {
-        Toast.makeText(context, "Not Supported yet", Toast.LENGTH_LONG).show()
+        val mapBottomSheet = MapBottomSheet()
+        mapBottomSheet.addSetLocationCallback { location: LatLng ->
+            createViewModel.setTaskLocation(location)
+        }
+        mapBottomSheet.show(childFragmentManager, "MapBottomSheet")
     }
 
     fun setAlarm() {
@@ -89,22 +96,7 @@ class CreateTaskFragment : Fragment() {
                 resources.getInteger(R.integer.home_create_animations_duration).toLong()
             // Wait until the fragment is visible
             delay(enterAnimationDuration)
-            val scaleButtonX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0f, 1f)
-            val scaleButtonY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0f, 1f)
-            ObjectAnimator.ofPropertyValuesHolder(
-                binding.createFab,
-                scaleButtonX,
-                scaleButtonY
-            ).apply {
-                addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationStart(animation: Animator?) {
-                        super.onAnimationStart(animation)
-                        binding.createFab.visibility = View.VISIBLE
-                    }
-                })
-                duration = enterAnimationDuration
-                start()
-            }
+            binding.createFab.animateIntoScreen()
         }
     }
 }
