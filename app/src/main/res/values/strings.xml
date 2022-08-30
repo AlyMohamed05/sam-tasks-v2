@@ -57,6 +57,8 @@
     <string name="explain_permission_content">This app needs fine location permission to be able to set location to task and send notify in the right time and location</string>
     <string name="explain_permission_refuse">No, Thanks</string>
     <string name="explain_permission_accept">Ok</string>
+    <string name="prevent_set_location">Can\'t set location while time or date is set</string>
+    <string name="prevent_set_time_date">Can\'t set while location is used</string>
 
     <!--    Map Bottom Sheet-->
     <string name="set_location_fab_description">Saves the current selected location</string>

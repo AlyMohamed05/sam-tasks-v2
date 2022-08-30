@@ -9,7 +9,7 @@ import java.util.*
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    var onDateSetCallback: ((String) -> Unit)? = null
+    var dateSetCallback: ((String) -> Unit)? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
@@ -20,13 +20,13 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-        onDateSetCallback?.let {
-            // TODO: parse the date and invoke callback with date as a parameter
-            it("hahaha you need to parse date first")
+        dateSetCallback?.let { callback ->
+            val date = "$year-${month + 1}-$day"
+            callback(date)
         }
     }
 
     fun setCallback(callback: (String) -> Unit) {
-        onDateSetCallback = callback
+        dateSetCallback = callback
     }
 }

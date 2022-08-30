@@ -26,7 +26,6 @@ import com.example.samtasks.utils.checkLocationPermission
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CreateTaskFragment : Fragment() {
@@ -62,6 +61,7 @@ class CreateTaskFragment : Fragment() {
             viewModel = createViewModel
             fragment = this@CreateTaskFragment
         }
+        observe()
     }
 
     override fun onStart() {
@@ -70,10 +70,11 @@ class CreateTaskFragment : Fragment() {
     }
 
     fun showDatePicker() {
-        val datePicker = DatePickerFragment()
-        datePicker.setCallback { date ->
-            Timber.d(date)
+        if (!ensureNoLocationIsSet()) {
+            return
         }
+        val datePicker = DatePickerFragment()
+        datePicker.setCallback { createViewModel.setDate(it) }
         datePicker.show(childFragmentManager, "datePicker")
     }
 
@@ -85,6 +86,11 @@ class CreateTaskFragment : Fragment() {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 )
             )
+            return
+        }
+        if (createViewModel.isDateOrTimeSet) {
+            // We can't set location for a task that has date and time.
+            Toast.makeText(context, R.string.prevent_set_location, Toast.LENGTH_SHORT).show()
             return
         }
         val mapBottomSheet = MapBottomSheet()
@@ -99,10 +105,11 @@ class CreateTaskFragment : Fragment() {
     }
 
     fun showTimePicker() {
-        val timePicker = TimePickerFragment()
-        timePicker.setCallback { time ->
-            Timber.d(time)
+        if (!ensureNoLocationIsSet()) {
+            return
         }
+        val timePicker = TimePickerFragment()
+        timePicker.setCallback { createViewModel.setTime(it) }
         timePicker.show(childFragmentManager, "timePicker")
     }
 
@@ -159,6 +166,29 @@ class CreateTaskFragment : Fragment() {
                 // to navigate to settings.
                 explainPermissionRequest(true)
             }
+        }
+    }
+
+    /**
+     * Returns false if location is set.
+     */
+    private fun ensureNoLocationIsSet(): Boolean {
+        if (createViewModel.isLocationSet) {
+            Toast.makeText(context, R.string.prevent_set_time_date, Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    private fun observe() {
+        createViewModel.apply {
+
+            jobFinished.observe(viewLifecycleOwner) { finish ->
+                if (finish) {
+                    navController.navigateUp()
+                }
+            }
+
         }
     }
 

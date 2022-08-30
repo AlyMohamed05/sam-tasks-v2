@@ -12,5 +12,6 @@ data class Task(
     val content: String = "",
     val finished: Boolean = false,
     val date: String? = null,
-    val time: String? = null
+    val time: String? = null,
+    val location: LatLng? = null
 )

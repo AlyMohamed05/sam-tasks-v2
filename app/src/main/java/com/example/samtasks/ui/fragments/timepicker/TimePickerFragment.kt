@@ -5,12 +5,11 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
-import java.text.DateFormat
 import java.util.*
 
 class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
-    private var onTimeSetCallback: ((String) -> Unit)? = null
+    private var timeSetCallback: ((String) -> Unit)? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
@@ -21,13 +20,13 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
     }
 
     override fun onTimeSet(picker: TimePicker?, hour: Int, minute: Int) {
-        onTimeSetCallback?.let { callback ->
-            // TODO : Parse the time and pass it to the callback
-            callback("TIME NOT PARSED YET")
+        timeSetCallback?.let { callback ->
+            val time = "$hour:$minute"
+            callback(time)
         }
     }
 
     fun setCallback(callback: (String) -> Unit) {
-        onTimeSetCallback = callback
+        timeSetCallback = callback
     }
 }

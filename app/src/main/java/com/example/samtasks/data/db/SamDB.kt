@@ -10,6 +10,7 @@ import com.example.samtasks.data.models.Task
     exportSchema = false,
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class SamDB : RoomDatabase() {
 
     abstract val tasksDao: TasksDao
