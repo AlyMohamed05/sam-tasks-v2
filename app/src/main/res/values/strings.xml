@@ -53,6 +53,10 @@
     <string name="location_button_description">Opens map to select a location for the task, then a location will be sent if location settings is enabled and you reached to location</string>
     <string name="time_button_description">Opens time editor to set a time for the task</string>
     <string name="alarm_button_description">Opens alarm editor to set an alarm for this task</string>
+    <string name="explain_permission_title">Location permission required</string>
+    <string name="explain_permission_content">This app needs fine location permission to be able to set location to task and send notify in the right time and location</string>
+    <string name="explain_permission_refuse">No, Thanks</string>
+    <string name="explain_permission_accept">Ok</string>
 
     <!--    Map Bottom Sheet-->
     <string name="set_location_fab_description">Saves the current selected location</string>

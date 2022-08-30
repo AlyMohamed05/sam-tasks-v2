@@ -1,5 +1,6 @@
 package com.example.samtasks.ui.fragments.bottom_sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -76,8 +77,10 @@ class MapBottomSheet : BottomSheetDialogFragment(),
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        map.isMyLocationEnabled = true
         map.setOnPoiClickListener(this)
         map.setOnMapLongClickListener(this)
     }
