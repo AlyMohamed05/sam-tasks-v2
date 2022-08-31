@@ -1,6 +1,7 @@
 package com.example.samtasks.ui.fragments.create_edit
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -22,6 +23,7 @@ import com.example.samtasks.ui.fragments.bottom_sheets.MapBottomSheet
 import com.example.samtasks.ui.fragments.datepicker.DatePickerFragment
 import com.example.samtasks.ui.fragments.timepicker.TimePickerFragment
 import com.example.samtasks.utils.animateIntoScreen
+import com.example.samtasks.utils.checkBackgroundLocationAccess
 import com.example.samtasks.utils.checkLocationPermission
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,11 @@ class CreateTaskFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { handleLocationPermissionResult(it) }
+
+    private val backgroundPermissionHandler =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { handleBackgroundLocationPermissionRequest(it) }
 
     private lateinit var binding: CreateTaskFragmentBinding
     private lateinit var navController: NavController
@@ -78,6 +85,7 @@ class CreateTaskFragment : Fragment() {
         datePicker.show(childFragmentManager, "datePicker")
     }
 
+    @SuppressLint("InlinedApi")
     fun showMapPicker() {
         if (!checkLocationPermission(requireContext())) {
             requestPermissionHandler.launch(
@@ -85,6 +93,12 @@ class CreateTaskFragment : Fragment() {
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 )
+            )
+            return
+        }
+        if (!checkBackgroundLocationAccess(requireContext())) {
+            backgroundPermissionHandler.launch(
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
             return
         }
@@ -122,10 +136,13 @@ class CreateTaskFragment : Fragment() {
      * permission.
      * @param goToSetting if set to true,it will navigate to app settings to edit permissions,if false it will request permission again.
      */
-    private fun explainPermissionRequest(goToSetting: Boolean = false) {
+    private fun explainPermissionRequest(
+        resId: Int,
+        goToSetting: Boolean = false
+    ) {
         val dialogBuilder = AlertDialog.Builder(context)
             .setTitle(R.string.explain_permission_title)
-            .setMessage(R.string.explain_permission_content)
+            .setMessage(resId)
             .setNegativeButton(R.string.explain_permission_refuse, null)
         if (goToSetting) {
             dialogBuilder.setPositiveButton(R.string.explain_permission_accept) { _, _ ->
@@ -160,17 +177,32 @@ class CreateTaskFragment : Fragment() {
             ) {
                 // User refused permission but we still can show permission
                 // dialog again.
-                explainPermissionRequest()
+                explainPermissionRequest(R.string.explain_permission_content)
             } else {
                 // Permission refused and we can't show dialog so user has
                 // to navigate to settings.
-                explainPermissionRequest(true)
+                explainPermissionRequest(R.string.explain_permission_content, true)
+            }
+        }
+    }
+
+    private fun handleBackgroundLocationPermissionRequest(granted: Boolean) {
+        if (granted) {
+            showMapPicker()
+        } else {
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                )
+            ) {
+                explainPermissionRequest(R.string.explain_background_request)
+            } else {
+                explainPermissionRequest(R.string.explain_background_request, true)
             }
         }
     }
 
     /**
-     * Returns false if location is set.
+     * @return Returns false if location is set.
      */
     private fun ensureNoLocationIsSet(): Boolean {
         if (createViewModel.isLocationSet) {
