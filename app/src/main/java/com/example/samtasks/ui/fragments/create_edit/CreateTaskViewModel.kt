@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.samtasks.R
 import com.example.samtasks.data.db.TasksDao
 import com.example.samtasks.data.models.Task
 import com.example.samtasks.receivers.GeofenceBroadcastReceiver
@@ -50,6 +52,9 @@ class CreateTaskViewModel @Inject constructor(
     val jobFinished: LiveData<Boolean>
         get() = _jobFinished
 
+    private val sharedPref: SharedPreferences
+    private val geofenceIdKey = context.getString(R.string.geofence_id_key)
+
     // Geofencing
     private val geofencingClient: GeofencingClient
     private val geofencePendingIntent by lazy {
@@ -74,21 +79,28 @@ class CreateTaskViewModel @Inject constructor(
 
     init {
         geofencingClient = LocationServices.getGeofencingClient(context)
+        sharedPref = context.getSharedPreferences(
+            context.getString(R.string.shared_preferences_name),
+            Context.MODE_PRIVATE
+        )
     }
 
     fun createTask() {
+        var geofenceId: String? = null
+        // create a geofence if the location is set
+        if (_taskLocation.value != null) {
+            geofenceId = generateGeofenceId()
+            createGeofence(geofenceId, _taskLocation.value!!)
+        }
         val task = Task(
             title = title.value!!,
             content = content.value!!,
             finished = this@CreateTaskViewModel.finished,
             date = date,
             time = time,
-            location = taskLocation.value
+            location = taskLocation.value,
+            geofenceId = geofenceId
         )
-        // create a geofence if the location is set
-        if (_taskLocation.value != null) {
-            createGeofence(_taskLocation.value!!)
-        }
         viewModelScope.launch {
             tasksDao.upsert(task)
         }
@@ -108,10 +120,10 @@ class CreateTaskViewModel @Inject constructor(
     }
 
     @SuppressLint("MissingPermission")
-    private fun createGeofence(location: LatLng) {
+    private fun createGeofence(geofenceId: String, location: LatLng) {
         // TODO : find a proper way to generate id for the request.
         val geofence = Geofence.Builder()
-            .setRequestId("REQUEST_ID")
+            .setRequestId(geofenceId)
             .setCircularRegion(location.latitude, location.longitude, 100f)
             .setExpirationDuration(1000L * 60L * 720L)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
@@ -123,6 +135,27 @@ class CreateTaskViewModel @Inject constructor(
         geofencingClient.addGeofences(request, geofencePendingIntent).run {
             addOnSuccessListener { Timber.d("Created geofence") }
             addOnFailureListener { Timber.d("Failed to create geofence") }
+        }
+    }
+
+    /**
+     * Generates an ID for the upcoming created geofence and uses shared pref
+     * to keep track of next id.
+     */
+    private fun generateGeofenceId(): String {
+        if (sharedPref.contains(geofenceIdKey)) {
+            val id = sharedPref.getInt(geofenceIdKey, 0)
+            sharedPref.edit().apply {
+                putInt(geofenceIdKey, id + 1)
+                apply()
+                return id.toString()
+            }
+        } else {
+            sharedPref.edit().apply {
+                putInt(geofenceIdKey, 1)
+                apply()
+                return 0.toString()
+            }
         }
     }
 }

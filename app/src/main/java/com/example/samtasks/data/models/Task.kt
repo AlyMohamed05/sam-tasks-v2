@@ -13,5 +13,6 @@ data class Task(
     val finished: Boolean = false,
     val date: String? = null,
     val time: String? = null,
-    val location: LatLng? = null
+    val location: LatLng? = null,
+    val geofenceId: String? = null
 )

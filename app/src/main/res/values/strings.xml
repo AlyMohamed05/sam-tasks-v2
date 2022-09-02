@@ -9,6 +9,7 @@
     <!--    Shared Preferences-->
     <string name="shared_preferences_name">sam_preferences</string>
     <string name="continue_without_login_key">continue_without_login</string>
+    <string name="geofence_id_key">GEOFENCE_ID</string>
 
     <!--    Notifications Strings-->
     <string name="geofencing_notification_channel_id">GEOFENCING_CHANNEL_ID</string>

@@ -19,6 +19,9 @@ interface TasksDao {
     @Query("SELECT * FROM tasks_table WHERE date = :date")
     fun getTasksByDateLive(date: String): LiveData<List<Task>>
 
+    @Query("SELECT * FROM tasks_table WHERE geofenceId = :id")
+    suspend fun getTaskByGeofenceId(id: String): Task?
+
     @Delete
     suspend fun delete(task: Task)
 }
