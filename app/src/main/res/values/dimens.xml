@@ -16,8 +16,16 @@
 
     <!--    Home Fragment-->
     <dimen name="fab_margin">12dp</dimen>
+    <!--    Should be same as circular indicator size-->
+    <dimen name="line_start_margin">50dp</dimen>
 
     <!--    Create Task Fragment-->
     <dimen name="edit_text_horizontal_margin">8dp</dimen>
+
+    <!--    Task Item Dimens-->
+    <dimen name="circular_indicator_size">50dp</dimen>
+    <dimen name="circular_indicator_margin_start">25dp</dimen>
+    <dimen name="title_start_margin">16dp</dimen>
+    <dimen name="content_top_margin">8dp</dimen>
 
 </resources>

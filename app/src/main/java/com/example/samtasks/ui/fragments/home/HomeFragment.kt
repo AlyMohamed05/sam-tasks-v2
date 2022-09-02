@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.samtasks.adapters.TasksAdapter
 import com.example.samtasks.databinding.HomeFragmentBinding
 import com.example.samtasks.ui.fragments.datepicker.DatePickerFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
     private lateinit var navController: NavController
+    private lateinit var tasksAdapter: TasksAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,20 +44,33 @@ class HomeFragment : Fragment() {
         binding.apply {
             lifecycleOwner = this@HomeFragment
             fragment = this@HomeFragment
+            tasksAdapter = TasksAdapter()
+            tasksRv.adapter = tasksAdapter
         }
+        observe()
     }
 
-    fun showDatePicker(){
+    fun showDatePicker() {
         val pickerFragment = DatePickerFragment()
         // TODO : Handle the date properly
         pickerFragment.setCallback { date ->
             Timber.d(date)
         }
-        pickerFragment.show(childFragmentManager,"datePicker")
+        pickerFragment.show(childFragmentManager, "datePicker")
     }
 
-    fun openCreateTaskFragment(){
+    fun openCreateTaskFragment() {
         navController.navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
+    }
+
+    private fun observe() {
+        homeViewModel.apply {
+
+            currentTasksList.observe(viewLifecycleOwner) { tasks ->
+                tasksAdapter.submitList(tasks)
+            }
+
+        }
     }
 
 }

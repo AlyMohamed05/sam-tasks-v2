@@ -28,6 +28,7 @@ import com.example.samtasks.utils.checkLocationPermission
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CreateTaskFragment : Fragment() {
@@ -123,7 +124,10 @@ class CreateTaskFragment : Fragment() {
             return
         }
         val timePicker = TimePickerFragment()
-        timePicker.setCallback { createViewModel.setTime(it) }
+        timePicker.setCallback {
+            Timber.d("Time set to : $it")
+            createViewModel.setTime(it)
+        }
         timePicker.show(childFragmentManager, "timePicker")
     }
 
