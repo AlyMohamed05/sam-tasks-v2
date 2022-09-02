@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@SuppressLint("UnspecifiedImmutableFlag")
 @HiltViewModel
 class CreateTaskViewModel @Inject constructor(
     @ApplicationContext context: Context,
@@ -61,11 +62,12 @@ class CreateTaskViewModel @Inject constructor(
                 PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
         } else {
+            Timber.d("No mutability flag is set")
             PendingIntent.getBroadcast(
                 context,
                 0,
                 intent,
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT
             )
         }
     }

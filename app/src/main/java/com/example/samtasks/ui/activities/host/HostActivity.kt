@@ -1,5 +1,6 @@
 package com.example.samtasks.ui.activities.host
 
+import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.ActivityHostBinding
+import com.example.samtasks.utils.createChannel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +34,7 @@ class HostActivity : AppCompatActivity() {
         navController = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment)!!
             .findNavController()
+        createNotificationChannels()
         checkUserState()
     }
 
@@ -59,6 +62,23 @@ class HostActivity : AppCompatActivity() {
             navController.navigate(R.id.welcomeFragment)
             true
         }
+    }
+
+    private fun createNotificationChannels() {
+        val notificationManager = getSystemService(NotificationManager::class.java)
+
+        // Create Channel for Sending notification when user enter geofence area.
+        val geofencingChannelId =
+            getString(R.string.geofencing_notification_channel_id)
+        val geofencingChannelName =
+            getString(R.string.geofencing_notification_channel_name)
+        val geofencingChannelDescription =
+            getString(R.string.geofencing_notification_channel_description)
+        notificationManager.createChannel(
+            geofencingChannelId,
+            geofencingChannelName,
+            geofencingChannelDescription
+        )
     }
 
 }
