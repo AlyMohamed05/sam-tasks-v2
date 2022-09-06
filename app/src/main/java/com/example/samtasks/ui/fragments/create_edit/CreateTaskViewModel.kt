@@ -14,6 +14,7 @@ import com.example.samtasks.R
 import com.example.samtasks.data.db.TasksDao
 import com.example.samtasks.data.models.Task
 import com.example.samtasks.receivers.GeofenceBroadcastReceiver
+import com.example.samtasks.utils.DispatchersProvider
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
@@ -21,6 +22,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,7 +31,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateTaskViewModel @Inject constructor(
     @ApplicationContext context: Context,
-    private val tasksDao: TasksDao
+    private val tasksDao: TasksDao,
+    private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {
 
     val title = MutableLiveData("")
@@ -101,7 +104,7 @@ class CreateTaskViewModel @Inject constructor(
             location = taskLocation.value,
             geofenceId = geofenceId
         )
-        viewModelScope.launch {
+        viewModelScope.launch (dispatchersProvider.main){
             tasksDao.upsert(task)
         }
         _jobFinished.value = true

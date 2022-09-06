@@ -6,10 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.samtasks.R
 import com.example.samtasks.auth.Authenticator
 import com.example.samtasks.auth.SignUpResponse
-import com.example.samtasks.utils.ValidationResult
-import com.example.samtasks.utils.validateAsEmail
-import com.example.samtasks.utils.validateAsName
-import com.example.samtasks.utils.validateAsPassword
+import com.example.samtasks.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(
-    private val authenticator: Authenticator
+    private val authenticator: Authenticator,
+    private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {
 
     val name = MutableLiveData("")
@@ -47,7 +45,7 @@ class SignupViewModel @Inject constructor(
         if (!validate()) {
             return
         }
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchersProvider.main) {
             val response = authenticator.signup(nameValue, emailValue, passwordValue)
             handleSignupResponse(response)
         }

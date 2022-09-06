@@ -2,6 +2,9 @@ package com.example.samtasks.ui.fragments.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.samtasks.auth.FakeAuthenticator
+import com.example.samtasks.utils.TestDispatchersProvider
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
@@ -12,12 +15,19 @@ class SignupViewModelTests {
 
     @get:Rule var rule: TestRule = InstantTaskExecutorRule()
 
+    @ExperimentalCoroutinesApi
+    val testDispatcher = StandardTestDispatcher()
+
+    @ExperimentalCoroutinesApi
+    val dispatchersProvider = TestDispatchersProvider(testDispatcher)
+
     private lateinit var signupViewModel: SignupViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup(){
         val fakeAuthenticator = FakeAuthenticator()
-        signupViewModel = SignupViewModel(fakeAuthenticator)
+        signupViewModel = SignupViewModel(fakeAuthenticator,dispatchersProvider)
     }
 
     @Test

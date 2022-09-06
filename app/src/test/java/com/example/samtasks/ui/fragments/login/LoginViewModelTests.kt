@@ -2,8 +2,11 @@ package com.example.samtasks.ui.fragments.login
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.samtasks.auth.FakeAuthenticator
-import com.example.samtasks.utils.CoroutineTestRule
+import com.example.samtasks.utils.DispatchersProvider
+import com.example.samtasks.utils.TestDispatchersProvider
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,12 +19,19 @@ class LoginViewModelTests {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
+    @ExperimentalCoroutinesApi
+    val testDispatcher = StandardTestDispatcher()
+
+    @ExperimentalCoroutinesApi
+    val dispatchersProvider = TestDispatchersProvider(testDispatcher)
+
     private lateinit var loginViewModel: LoginViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup(){
         val fakeAuthenticator = FakeAuthenticator()
-        loginViewModel = LoginViewModel(fakeAuthenticator)
+        loginViewModel = LoginViewModel(fakeAuthenticator,dispatchersProvider)
     }
 
     @Test

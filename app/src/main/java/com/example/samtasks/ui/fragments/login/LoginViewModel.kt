@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.samtasks.R
 import com.example.samtasks.auth.Authenticator
 import com.example.samtasks.auth.LoginResponse
+import com.example.samtasks.utils.DispatchersProvider
 import com.example.samtasks.utils.ValidationResult
 import com.example.samtasks.utils.validateAsEmail
 import com.example.samtasks.utils.validateAsPassword
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authenticator: Authenticator
+    private val authenticator: Authenticator,
+    private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {
 
     val email = MutableLiveData("")
@@ -49,28 +51,32 @@ class LoginViewModel @Inject constructor(
         if (!validate()) {
             return
         }
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchersProvider.main) {
             val response = authenticator.login(emailValue, passwordValue)
             handleLoginResponse(response)
         }
     }
 
     fun signInWithGoogleAccount(account: GoogleSignInAccount) {
-        viewModelScope.launch { authenticator.signInWithGoogleAccount(account) }
+        viewModelScope.launch(dispatchersProvider.main) {
+            authenticator.signInWithGoogleAccount(
+                account
+            )
+        }
     }
 
     fun sendResetPasswordEmail(email: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchersProvider.main) {
             val succeeded = authenticator.requestPasswordReset(email)
-            if(succeeded){
+            if (succeeded) {
                 _uiEvents.value = UiEvents.ShowToast(R.string.sent)
-            }else{
+            } else {
                 _uiEvents.value = UiEvents.ShowToast(R.string.failed_to_reset)
             }
         }
     }
 
-    fun resetUiEvents(){
+    fun resetUiEvents() {
         _uiEvents.value = UiEvents.NoValue
     }
 
