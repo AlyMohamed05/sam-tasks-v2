@@ -115,5 +115,6 @@ dependencies {
     androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.42'
+    debugImplementation "androidx.fragment:fragment-testing:1.5.2"
 
 }
