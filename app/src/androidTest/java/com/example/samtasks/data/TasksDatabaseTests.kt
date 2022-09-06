@@ -1,31 +1,42 @@
 package com.example.samtasks.data
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.filters.MediumTest
 import com.example.samtasks.data.db.SamDB
 import com.example.samtasks.data.db.TasksDao
 import com.example.samtasks.data.models.Task
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.io.IOException
 import org.junit.Assert.*
+import org.junit.Rule
+import javax.inject.Inject
 
-@RunWith(AndroidJUnit4::class)
+@MediumTest
+@HiltAndroidTest
+@ExperimentalCoroutinesApi
 class TasksDatabaseTests {
 
-    private lateinit var database: SamDB
-    private lateinit var tasksDao: TasksDao
+    @get:Rule val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Inject
+    lateinit var database: SamDB
+
+    @Inject
+    lateinit var tasksDao: TasksDao
 
     @Before
     fun createDB() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        database = Room.inMemoryDatabaseBuilder(context, SamDB::class.java).build()
-        tasksDao = database.tasksDao
+        hiltRule.inject()
     }
 
     @After
@@ -37,7 +48,7 @@ class TasksDatabaseTests {
     @Test
     @Throws(Exception::class)
     fun testInsert() {
-        runBlocking {
+        runTest {
             tasksDao.upsert(
                 Task(
                     title = "Title",
@@ -55,7 +66,7 @@ class TasksDatabaseTests {
     @Test
     @Throws(Exception::class)
     fun testDelete() {
-        runBlocking {
+        runTest {
             repeat(5) {
                 tasksDao.upsert(Task())
             }
