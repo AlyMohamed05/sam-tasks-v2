@@ -1,4 +1,4 @@
-package com.example.samtasks
+package com.example.samtasks.data
 
 import android.content.Context
 import androidx.room.Room
