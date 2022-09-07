@@ -1,7 +1,6 @@
 package com.example.samtasks.ui.fragments.welcome
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.WelcomeFragmentBinding
-import com.example.samtasks.ui.activities.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
