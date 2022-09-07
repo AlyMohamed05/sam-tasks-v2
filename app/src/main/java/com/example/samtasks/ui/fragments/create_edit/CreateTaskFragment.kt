@@ -46,7 +46,6 @@ class CreateTaskFragment : Fragment() {
         ) { handleBackgroundLocationPermissionRequest(it) }
 
     private lateinit var binding: CreateTaskFragmentBinding
-    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +62,6 @@ class CreateTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = findNavController()
         binding.apply {
             lifecycleOwner = this@CreateTaskFragment
             viewModel = createViewModel
@@ -132,7 +130,7 @@ class CreateTaskFragment : Fragment() {
     }
 
     fun backWithoutSave() {
-        navController.navigateUp()
+        findNavController().navigateUp()
     }
 
     /**
@@ -221,7 +219,7 @@ class CreateTaskFragment : Fragment() {
 
             jobFinished.observe(viewLifecycleOwner) { finish ->
                 if (finish) {
-                    navController.navigateUp()
+                    findNavController().navigateUp()
                 }
             }
 

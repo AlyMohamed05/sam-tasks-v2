@@ -1,6 +1,7 @@
 package com.example.samtasks.ui.fragments.bottom_sheets
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,7 @@ import com.example.samtasks.utils.animateOutScreen
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PointOfInterest
+import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,6 +78,7 @@ class MapBottomSheet : BottomSheetDialogFragment(),
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        setMapStyle()
         map.isMyLocationEnabled = true
         map.setOnPoiClickListener(this)
         map.setOnMapLongClickListener(this)
@@ -104,6 +103,16 @@ class MapBottomSheet : BottomSheetDialogFragment(),
             MarkerOptions()
                 .position(location)
         )
+    }
+
+    private fun setMapStyle() {
+        try {
+            map.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.map_style)
+            )
+        } catch (exception: Resources.NotFoundException) {
+            Timber.d("Failed to set map style")
+        }
     }
 
     private fun initClickListeners() {
