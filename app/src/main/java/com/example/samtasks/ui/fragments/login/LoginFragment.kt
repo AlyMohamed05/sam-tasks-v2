@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.samtasks.R
 import com.example.samtasks.databinding.LoginFragmentBinding
@@ -24,7 +23,6 @@ class LoginFragment : Fragment() {
     private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var binding: LoginFragmentBinding
-    private lateinit var navController: NavController
     private lateinit var googleSignInClient: GoogleSignInClient
 
     private val googleSignInHandler = registerForActivityResult(
@@ -59,7 +57,6 @@ class LoginFragment : Fragment() {
             lifecycleOwner = this@LoginFragment
             viewModel = loginViewModel
         }
-        navController = findNavController()
         initClickListeners()
         initGoogleSignInClient()
         observe()
@@ -83,7 +80,7 @@ class LoginFragment : Fragment() {
     private fun initClickListeners() {
         binding.apply {
             signupButton.setOnClickListener {
-                navController.navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
             }
             googleButton.setOnClickListener { signInByGoogle() }
             forgotPasswordTextButton.setOnClickListener { showResetPasswordDialog() }
