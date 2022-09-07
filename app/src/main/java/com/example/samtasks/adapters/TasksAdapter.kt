@@ -10,11 +10,16 @@ import com.example.samtasks.databinding.TaskItemBinding
 
 class TasksAdapter : ListAdapter<Task, TasksAdapter.TaskViewHolder>(TaskDiffUtilsItemCallback()) {
 
+    private var taskItemCallback: ((Task) -> Unit)? = null
+
     class TaskViewHolder private constructor(private val binding: TaskItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: Task) {
+        fun bind(task: Task,callback: ((Task) -> Unit)?) {
             binding.task = task
+            callback?.let {
+                binding.root.setOnClickListener { it(task) }
+            }
             binding.executePendingBindings()
         }
 
@@ -36,7 +41,11 @@ class TasksAdapter : ListAdapter<Task, TasksAdapter.TaskViewHolder>(TaskDiffUtil
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),taskItemCallback)
+    }
+
+    fun setTaskItemCallback(callback: (Task) -> Unit){
+        taskItemCallback = callback
     }
 }
 

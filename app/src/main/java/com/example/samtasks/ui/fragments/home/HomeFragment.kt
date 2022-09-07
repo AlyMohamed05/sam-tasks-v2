@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.samtasks.adapters.TasksAdapter
+import com.example.samtasks.data.models.Task
 import com.example.samtasks.databinding.HomeFragmentBinding
 import com.example.samtasks.ui.fragments.datepicker.DatePickerFragment
+import com.example.samtasks.ui.fragments.dialogs.TaskDialog
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -45,9 +47,17 @@ class HomeFragment : Fragment() {
             lifecycleOwner = this@HomeFragment
             fragment = this@HomeFragment
             tasksAdapter = TasksAdapter()
+            tasksAdapter.setTaskItemCallback { task ->
+                showTaskDialog(task)
+            }
             tasksRv.adapter = tasksAdapter
         }
         observe()
+    }
+
+    private fun showTaskDialog(task: Task){
+        val dialog = TaskDialog(task)
+        dialog.show(childFragmentManager,"taskFragment")
     }
 
     fun showDatePicker() {
