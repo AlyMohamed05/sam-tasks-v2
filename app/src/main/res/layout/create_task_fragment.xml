@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.samtasks.ui.fragments.create_edit.CreateTaskViewModel" />
+            type="com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel" />
 
         <variable
             name="fragment"
-            type="com.example.samtasks.ui.fragments.create_edit.CreateTaskFragment" />
+            type="com.udacity.project4.ui.fragments.create_edit.CreateTaskFragment" />
 
     </data>
 

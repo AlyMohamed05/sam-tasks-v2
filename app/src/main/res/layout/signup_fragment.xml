@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.samtasks.ui.fragments.signup.SignupViewModel" />
+            type="com.udacity.project4.ui.fragments.signup.SignupViewModel" />
 
     </data>
 

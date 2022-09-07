@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092810453132:android:951958968d7deefdbfcba9",
+        "mobilesdk_app_id": "1:1092810453132:android:4c71810f1dfdbfeebfcba9",
         "android_client_info": {
-          "package_name": "com.example.samtasks"
+          "package_name": "com.udacity.project4"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1092810453132-j7u1qec9i1k00e5rs60ruvfrbdqquqp6.apps.googleusercontent.com",
+          "client_id": "1092810453132-rfoj2t1959m85fc6dso4tjko02cpgmql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.samtasks",
+            "package_name": "com.udacity.project4",
             "certificate_hash": "59ac9564d993130915300e8ddd2929f6d5811037"
           }
         },

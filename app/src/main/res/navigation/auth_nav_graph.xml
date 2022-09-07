@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.samtasks.ui.fragments.login.LoginFragment"
+        android:name="com.udacity.project4.ui.fragments.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/login_fragment">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.samtasks.ui.fragments.signup.SignupFragment"
+        android:name="com.udacity.project4.ui.fragments.signup.SignupFragment"
         android:label="SignupFragment"
         tools:layout="@layout/signup_fragment" />
 </navigation>
