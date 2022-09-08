@@ -69,10 +69,6 @@ class CreateTaskFragment : Fragment() {
         observe()
     }
 
-    override fun onStart() {
-        super.onStart()
-        animateFabButtonOnStart()
-    }
 
     fun showDatePicker() {
         if (!ensureNoLocationIsSet()) {
