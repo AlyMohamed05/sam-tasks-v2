@@ -6,12 +6,9 @@ import com.udacity.project4.R
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.data.db.TasksDao
 import com.udacity.project4.data.models.Task
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel (
     authenticator: Authenticator,
     tasksDao: TasksDao
 ) : ViewModel() {

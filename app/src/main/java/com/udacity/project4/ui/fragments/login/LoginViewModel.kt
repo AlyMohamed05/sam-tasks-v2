@@ -12,13 +12,10 @@ import com.udacity.project4.utils.ValidationResult
 import com.udacity.project4.utils.validateAsEmail
 import com.udacity.project4.utils.validateAsPassword
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltViewModel
-class LoginViewModel @Inject constructor(
+class LoginViewModel(
     private val authenticator: Authenticator,
     private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {

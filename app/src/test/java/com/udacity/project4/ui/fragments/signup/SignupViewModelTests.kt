@@ -2,6 +2,7 @@ package com.udacity.project4.ui.fragments.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.udacity.project4.auth.FakeAuthenticator
+import com.udacity.project4.di.localTestModule
 import com.udacity.project4.utils.TestDispatchersProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -10,10 +11,18 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.rules.TestRule
+import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
+import org.koin.test.get
 
-class SignupViewModelTests {
+class SignupViewModelTests: KoinTest {
 
     @get:Rule var rule: TestRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val koinTestRule = KoinTestRule.create{
+        modules(localTestModule)
+    }
 
     @ExperimentalCoroutinesApi
     val testDispatcher = StandardTestDispatcher()
@@ -26,8 +35,7 @@ class SignupViewModelTests {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup(){
-        val fakeAuthenticator = FakeAuthenticator()
-        signupViewModel = SignupViewModel(fakeAuthenticator,dispatchersProvider)
+        signupViewModel = SignupViewModel(get(),dispatchersProvider)
     }
 
     @Test

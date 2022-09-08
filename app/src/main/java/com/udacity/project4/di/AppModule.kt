@@ -1,52 +1,44 @@
 package com.udacity.project4.di
 
-import android.content.Context
 import androidx.room.Room
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.auth.AuthenticatorImpl
 import com.udacity.project4.data.db.SamDB
-import com.udacity.project4.data.db.TasksDao
+import com.udacity.project4.ui.activities.auth.AuthViewModel
+import com.udacity.project4.ui.activities.host.HostViewModel
+import com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel
+import com.udacity.project4.ui.fragments.home.HomeViewModel
+import com.udacity.project4.ui.fragments.location.LocationPickerViewModel
+import com.udacity.project4.ui.fragments.login.LoginViewModel
+import com.udacity.project4.ui.fragments.signup.SignupViewModel
 import com.udacity.project4.utils.DispatchersProvider
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-@Suppress("unused")
-object AppModule {
+val appModule = module {
 
-    @Provides
-    @Singleton
-    fun provideAuthenticator(): Authenticator {
-        return AuthenticatorImpl()
+    single<Authenticator> {
+        AuthenticatorImpl()
     }
 
-    @Provides
-    @Singleton
-    fun provideSamDB(@ApplicationContext context: Context): SamDB {
-        return Room.databaseBuilder(
-            context,
+    single {
+        Room.databaseBuilder(
+            androidContext(),
             SamDB::class.java,
             "SamDB.db"
         ).build()
     }
 
-    @Provides
-    @Singleton
-    fun provideTasksDao(samDB: SamDB): TasksDao {
-        return samDB.tasksDao
+    single {
+        val samDb: SamDB = get()
+        samDb.tasksDao
     }
 
-    @Provides
-    @Singleton
-    fun provideDispatchersProvider(): DispatchersProvider {
-        return object : DispatchersProvider {
+    single<DispatchersProvider> {
+        object : DispatchersProvider {
             override val main: CoroutineDispatcher
                 get() = Dispatchers.Main
             override val io: CoroutineDispatcher
@@ -57,4 +49,37 @@ object AppModule {
                 get() = Dispatchers.Unconfined
         }
     }
+
+    viewModel {
+        AuthViewModel(get())
+    }
+
+    viewModel {
+        HostViewModel(get())
+    }
+
+    viewModel {
+        CreateTaskViewModel(
+            androidContext(),
+            get(),
+            get()
+        )
+    }
+
+    viewModel{
+        HomeViewModel(get(),get())
+    }
+
+    viewModel {
+        LoginViewModel(get(),get())
+    }
+
+    viewModel {
+        SignupViewModel(get(),get())
+    }
+
+    viewModel{
+        LocationPickerViewModel()
+    }
+
 }

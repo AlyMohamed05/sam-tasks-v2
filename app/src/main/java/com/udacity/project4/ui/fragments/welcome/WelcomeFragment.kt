@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.udacity.project4.R
 import com.udacity.project4.databinding.WelcomeFragmentBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class WelcomeFragment : Fragment() {
 
     private lateinit var binding: WelcomeFragmentBinding

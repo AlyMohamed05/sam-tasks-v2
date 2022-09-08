@@ -1,12 +1,12 @@
 package com.udacity.project4.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.udacity.project4.data.db.SamDB
 import com.udacity.project4.data.db.TasksDao
 import com.udacity.project4.data.models.Task
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
+import com.udacity.project4.di.instrumentedTestModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -15,27 +15,32 @@ import org.junit.Test
 import java.io.IOException
 import org.junit.Assert.*
 import org.junit.Rule
-import javax.inject.Inject
+import org.junit.runner.RunWith
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
+import org.koin.test.KoinTest
+import org.koin.test.inject
 
-@MediumTest
-@HiltAndroidTest
 @ExperimentalCoroutinesApi
-class TasksDatabaseTests {
-
-    @get:Rule val hiltRule = HiltAndroidRule(this)
+@MediumTest
+@RunWith(AndroidJUnit4::class)
+class TasksDatabaseTests : KoinTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Inject
-    lateinit var database: SamDB
+    private val database: SamDB by inject()
 
-    @Inject
-    lateinit var tasksDao: TasksDao
+    private val tasksDao: TasksDao by inject()
 
     @Before
     fun createDB() {
-        hiltRule.inject()
+        loadKoinModules(instrumentedTestModule)
+    }
+
+    @After
+    fun clear(){
+        unloadKoinModules(instrumentedTestModule)
     }
 
     @After

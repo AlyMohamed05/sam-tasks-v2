@@ -7,13 +7,10 @@ import com.udacity.project4.R
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.auth.SignUpResponse
 import com.udacity.project4.utils.*
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltViewModel
-class SignupViewModel @Inject constructor(
+class SignupViewModel (
     private val authenticator: Authenticator,
     private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {

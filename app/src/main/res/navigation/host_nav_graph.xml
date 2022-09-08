@@ -50,7 +50,16 @@
         android:id="@+id/createTaskFragment"
         android:name="com.udacity.project4.ui.fragments.create_edit.CreateTaskFragment"
         android:label="CreateTaskFragment"
-        tools:layout="@layout/create_task_fragment" />
+        tools:layout="@layout/create_task_fragment" >
+        <action
+            android:id="@+id/action_createTaskFragment_to_locationPicker"
+            app:destination="@id/locationPicker" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/location_picker_fragment"
+        android:id="@+id/locationPicker"
+        android:name="com.udacity.project4.ui.fragments.location.LocationPicker"
+        android:label="LocationPicker" />
 
 
 </navigation>

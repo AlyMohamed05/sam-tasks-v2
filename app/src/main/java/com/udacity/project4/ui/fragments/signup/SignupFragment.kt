@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.udacity.project4.databinding.SignupFragmentBinding
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class SignupFragment: Fragment() {
 
-    private val signupViewModel: SignupViewModel by viewModels()
+    private val signupViewModel by viewModel<SignupViewModel>()
 
     private lateinit var binding: SignupFragmentBinding
 

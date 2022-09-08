@@ -8,21 +8,19 @@ import com.udacity.project4.data.db.TasksDao
 import com.udacity.project4.utils.sendGeofenceNotification
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-@AndroidEntryPoint
-class GeofenceBroadcastReceiver : BroadcastReceiver() {
+class GeofenceBroadcastReceiver : BroadcastReceiver(), KoinComponent {
 
     private val broadcastScope = CoroutineScope(Dispatchers.IO)
 
-    @Inject
-    lateinit var tasksDao: TasksDao
+    val tasksDao: TasksDao by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
         Timber.d("Received a broadcast")
@@ -42,17 +40,14 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val geofenceId = triggeredGeofence[0].requestId
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         broadcastScope.launch {
-            if (::tasksDao.isInitialized) {
-                val task = tasksDao.getTaskByGeofenceId(geofenceId)
-                withContext(Dispatchers.Main) {
-                    notificationManager.sendGeofenceNotification(
-                        context,
-                        task?.title ?: ""
-                    )
-                }
-            } else {
-                Timber.d("tasksDao is not initialized")
+            val task = tasksDao.getTaskByGeofenceId(geofenceId)
+            withContext(Dispatchers.Main) {
+                notificationManager.sendGeofenceNotification(
+                    context,
+                    task?.title ?: ""
+                )
             }
+
         }
     }
 }

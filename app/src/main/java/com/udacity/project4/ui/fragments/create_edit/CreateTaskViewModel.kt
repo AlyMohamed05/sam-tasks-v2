@@ -20,16 +20,12 @@ import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 @SuppressLint("UnspecifiedImmutableFlag")
-@HiltViewModel
-class CreateTaskViewModel @Inject constructor(
-    @ApplicationContext context: Context,
+class CreateTaskViewModel(
+    context: Context,
     private val tasksDao: TasksDao,
     private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {
@@ -103,7 +99,7 @@ class CreateTaskViewModel @Inject constructor(
             location = taskLocation.value,
             geofenceId = geofenceId
         )
-        viewModelScope.launch (dispatchersProvider.main){
+        viewModelScope.launch(dispatchersProvider.main) {
             tasksDao.upsert(task)
         }
         _jobFinished.value = true

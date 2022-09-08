@@ -13,26 +13,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.model.LatLng
 import com.udacity.project4.R
 import com.udacity.project4.databinding.CreateTaskFragmentBinding
-import com.udacity.project4.ui.fragments.bottom_sheets.MapBottomSheet
 import com.udacity.project4.ui.fragments.datepicker.DatePickerFragment
 import com.udacity.project4.ui.fragments.timepicker.TimePickerFragment
 import com.udacity.project4.utils.animateIntoScreen
 import com.udacity.project4.utils.checkBackgroundLocationAccess
 import com.udacity.project4.utils.checkLocationPermission
-import com.google.android.gms.maps.model.LatLng
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-@AndroidEntryPoint
 class CreateTaskFragment : Fragment() {
 
-    private val createViewModel: CreateTaskViewModel by viewModels()
+    private val createViewModel by viewModel<CreateTaskViewModel>()
 
     private val requestPermissionHandler =
         registerForActivityResult(
@@ -45,6 +43,14 @@ class CreateTaskFragment : Fragment() {
         ) { handleBackgroundLocationPermissionRequest(it) }
 
     private lateinit var binding: CreateTaskFragmentBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("locationRequest") { _, bundle ->
+            val location = bundle.getParcelable<LatLng>("location")
+            createViewModel.setTaskLocation(location!!)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,11 +111,9 @@ class CreateTaskFragment : Fragment() {
             Toast.makeText(context, R.string.prevent_set_location, Toast.LENGTH_SHORT).show()
             return
         }
-        val mapBottomSheet = MapBottomSheet()
-        mapBottomSheet.addSetLocationCallback { location: LatLng ->
-            createViewModel.setTaskLocation(location)
-        }
-        mapBottomSheet.show(childFragmentManager, "MapBottomSheet")
+        findNavController().navigate(
+            CreateTaskFragmentDirections.actionCreateTaskFragmentToLocationPicker()
+        )
     }
 
     fun setAlarm() {

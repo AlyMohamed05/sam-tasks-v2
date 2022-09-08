@@ -3,7 +3,6 @@ package com.udacity.project4.ui.activities.host
 import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -11,12 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.udacity.project4.R
 import com.udacity.project4.databinding.ActivityHostBinding
 import com.udacity.project4.utils.createChannel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class HostActivity : AppCompatActivity() {
 
-    private val viewModel: HostViewModel by viewModels()
+    private val viewModel by viewModel<HostViewModel>()
 
     private lateinit var binding: ActivityHostBinding
     private lateinit var navController: NavController
