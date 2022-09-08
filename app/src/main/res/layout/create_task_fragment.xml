@@ -144,9 +144,11 @@
             android:onClick="@{() -> viewModel.createTask()}"
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/done_fab_description"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottom_bar_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_done" />
+            app:srcCompat="@drawable/ic_done"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

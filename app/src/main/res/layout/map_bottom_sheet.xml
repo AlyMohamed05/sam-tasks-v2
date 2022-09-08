@@ -30,7 +30,9 @@
             android:backgroundTint="@color/secondaryColor"
             android:layout_margin="@dimen/fab_margin"
             android:contentDescription="@string/set_location_fab_description"
-            app:srcCompat="@drawable/ic_done" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_done"
+            tools:visibility="visible" />
 
     </FrameLayout>
 

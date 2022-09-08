@@ -135,12 +135,12 @@ class MapBottomSheet : BottomSheetDialogFragment(),
             selectedPosition.observe(this@MapBottomSheet) { position ->
                 if (position != null) {
                     if (setLocationButton.visibility != View.VISIBLE) {
-                        //setLocationButton.isEnabled = false
+                        setLocationButton.animateIntoScreen()
                     }
                     setMapMarker(position)
                 } else {
                     if (setLocationButton.visibility == View.VISIBLE) {
-                       // setLocationButton.animateOutScreen()
+                        setLocationButton.animateOutScreen()
                     }
                 }
             }
