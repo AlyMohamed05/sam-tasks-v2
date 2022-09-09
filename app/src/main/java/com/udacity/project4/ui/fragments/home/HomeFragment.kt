@@ -51,11 +51,12 @@ class HomeFragment : Fragment() {
             tasksRv.adapter = tasksAdapter
         }
         observe()
+        checkIntentForTask()
     }
 
-    private fun showTaskDialog(task: Task){
+    private fun showTaskDialog(task: Task) {
         val dialog = TaskDialog(task)
-        dialog.show(childFragmentManager,"taskFragment")
+        dialog.show(childFragmentManager, "taskFragment")
     }
 
     fun showDatePicker() {
@@ -71,18 +72,33 @@ class HomeFragment : Fragment() {
         navController.navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
     }
 
+    private fun checkIntentForTask() {
+        val taskId = requireActivity().intent.getIntExtra("taskId", -1)
+        if (taskId == -1) {
+            return
+        }
+        homeViewModel.showTask(taskId)
+    }
+
     private fun observe() {
         homeViewModel.apply {
 
             currentTasksList.observe(viewLifecycleOwner) { tasks ->
                 tasksAdapter.submitList(tasks)
                 // show no data indicator if list is empty
-                if(tasks.isEmpty()){
+                if (tasks.isEmpty()) {
                     binding.timelineIndicator.visibility = View.INVISIBLE
                     binding.noDataIndicator.visibility = View.VISIBLE
-                }else{
+                } else {
                     binding.timelineIndicator.visibility = View.VISIBLE
                     binding.noDataIndicator.visibility = View.INVISIBLE
+                }
+            }
+
+            taskFromIntent.observe(viewLifecycleOwner) { task ->
+                if (task != null) {
+                    showTaskDialog(task)
+                    homeViewModel.resetTaskFromIntent()
                 }
             }
 

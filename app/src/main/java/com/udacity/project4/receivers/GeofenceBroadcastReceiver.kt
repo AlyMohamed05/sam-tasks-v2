@@ -44,7 +44,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver(), KoinComponent {
             withContext(Dispatchers.Main) {
                 notificationManager.sendGeofenceNotification(
                     context,
-                    task?.title ?: ""
+                    task?.title ?: "",
+                    task?.id!!
                 )
             }
 

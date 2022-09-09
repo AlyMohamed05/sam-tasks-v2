@@ -29,6 +29,10 @@ class TasksLocalDataSource(
         return tasksDao.getTasksLive()
     }
 
+    override suspend fun getTaskById(taskId: Int): Task? {
+        return tasksDao.getTaskById(taskId)
+    }
+
     override suspend fun getTaskByGeofenceId(geofenceId: String): Task? {
         return tasksDao.getTaskByGeofenceId(geofenceId)
     }

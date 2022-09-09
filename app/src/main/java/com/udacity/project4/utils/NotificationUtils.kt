@@ -32,10 +32,12 @@ fun NotificationManager.createChannel(
 
 fun NotificationManager.sendGeofenceNotification(
     context: Context,
-    content: String
+    content: String,
+    taskId: Int
 ) {
     val channelId = context.getString(R.string.geofencing_notification_channel_id)
     val intent = Intent(context, HostActivity::class.java)
+    intent.putExtra("taskId",taskId)
     val pendingIntent = PendingIntent.getActivity(
         context,
         PENDING_INTENT_ID,

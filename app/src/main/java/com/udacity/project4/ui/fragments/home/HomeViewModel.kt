@@ -1,16 +1,19 @@
 package com.udacity.project4.ui.fragments.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.udacity.project4.R
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.models.Task
+import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeViewModel(
     authenticator: Authenticator,
-    tasksRepository: TasksDataSource
+    private val tasksRepository: TasksDataSource
 ) : ViewModel() {
 
     val user = authenticator.user
@@ -19,6 +22,22 @@ class HomeViewModel(
         get() = getGreetingTextId()
 
     val currentTasksList: LiveData<List<Task>> = tasksRepository.getTasksLive()
+
+    private val _taskFromIntent: MutableLiveData<Task?> = MutableLiveData(null)
+    val taskFromIntent: LiveData<Task?>
+        get() = _taskFromIntent
+
+
+    fun showTask(taskId: Int) {
+        viewModelScope.launch {
+            val task = tasksRepository.getTaskById(taskId)
+            _taskFromIntent.value = task
+        }
+    }
+
+    fun resetTaskFromIntent() {
+        _taskFromIntent.value = null
+    }
 
     /**
      * Returns string resource for text shown at top.

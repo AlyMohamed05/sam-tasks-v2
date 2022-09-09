@@ -22,6 +22,9 @@ interface TasksDao {
     @Query("SELECT * FROM tasks_table WHERE geofenceId = :id")
     suspend fun getTaskByGeofenceId(id: String): Task?
 
+    @Query("SELECT * FROM tasks_table WHERE id = :taskId")
+    suspend fun getTaskById(taskId: Int): Task?
+
     @Delete
     suspend fun delete(task: Task)
 }

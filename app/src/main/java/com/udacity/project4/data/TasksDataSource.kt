@@ -10,6 +10,7 @@ interface TasksDataSource {
     suspend fun deleteTask(task: Task)
     suspend fun getTasks(): List<Task>
     fun getTasksLive(): LiveData<List<Task>>
+    suspend fun getTaskById(taskId: Int): Task?
     suspend fun getTaskByGeofenceId(geofenceId: String): Task?
 
 }
