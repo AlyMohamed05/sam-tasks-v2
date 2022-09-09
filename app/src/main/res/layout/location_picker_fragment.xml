@@ -22,10 +22,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:contentDescription="@string/set_location_fab_description"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@color/secondaryColor"
             app:srcCompat="@drawable/ic_done" />
+
+        <ImageView
+            android:id="@+id/layer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="#54FFFFFF"
+            android:contentDescription="@string/set_layer_button"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_layers"/>
 
     </RelativeLayout>
 

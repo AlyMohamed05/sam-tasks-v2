@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.udacity.project4.adapters.TasksAdapter
 import com.udacity.project4.data.models.Task
 import com.udacity.project4.databinding.HomeFragmentBinding
-import com.udacity.project4.ui.fragments.datepicker.DatePickerFragment
+import com.udacity.project4.ui.fragments.dialogs.datepicker.DatePickerFragment
 import com.udacity.project4.ui.fragments.dialogs.TaskDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber

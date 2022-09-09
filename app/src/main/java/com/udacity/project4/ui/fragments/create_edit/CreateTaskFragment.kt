@@ -19,8 +19,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
 import com.udacity.project4.R
 import com.udacity.project4.databinding.CreateTaskFragmentBinding
-import com.udacity.project4.ui.fragments.datepicker.DatePickerFragment
-import com.udacity.project4.ui.fragments.timepicker.TimePickerFragment
+import com.udacity.project4.ui.fragments.dialogs.datepicker.DatePickerFragment
+import com.udacity.project4.ui.fragments.dialogs.timepicker.TimePickerFragment
 import com.udacity.project4.utils.animateIntoScreen
 import com.udacity.project4.utils.checkBackgroundLocationAccess
 import com.udacity.project4.utils.checkLocationPermission

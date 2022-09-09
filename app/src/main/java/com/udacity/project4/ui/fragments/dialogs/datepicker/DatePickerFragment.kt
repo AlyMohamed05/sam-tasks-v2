@@ -1,4 +1,4 @@
-package com.udacity.project4.ui.fragments.datepicker
+package com.udacity.project4.ui.fragments.dialogs.datepicker
 
 import android.app.DatePickerDialog
 import android.app.Dialog

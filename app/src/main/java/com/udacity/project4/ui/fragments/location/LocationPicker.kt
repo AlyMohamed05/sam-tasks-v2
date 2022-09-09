@@ -112,6 +112,14 @@ class LocationPicker : Fragment(),
                 findNavController().navigateUp()
             }
 
+            layerButton.setOnClickListener {
+                val mapTypeBottomSheet = MapTypeBottomSheet()
+                mapTypeBottomSheet.onMapTypeSelectedCallback { type ->
+                    map.mapType = type
+                }
+                mapTypeBottomSheet.show(childFragmentManager,"mapTypeBottomSheet")
+            }
+
         }
     }
 }

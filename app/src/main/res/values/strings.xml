@@ -68,6 +68,14 @@
     <string name="prevent_set_time_date">Can\'t set while location is used</string>
     <string name="explain_background_request">This app needs background location access to be able to send notifications at right place</string>
 
-    <!--    Map Bottom Sheet-->
+    <!--    Location Fragment-->
     <string name="set_location_fab_description">Saves the current selected location</string>
+    <string name="set_layer_button">Opens bottom sheet to choose the map type</string>
+
+    <!--    Map Type Bottom Sheet-->
+    <string name="normal">Normal</string>
+    <string name="satalite">Satellite</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="terrain">Terrain</string>
+
 </resources>

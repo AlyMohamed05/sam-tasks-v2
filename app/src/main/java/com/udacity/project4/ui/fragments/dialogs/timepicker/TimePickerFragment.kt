@@ -1,4 +1,4 @@
-package com.udacity.project4.ui.fragments.timepicker
+package com.udacity.project4.ui.fragments.dialogs.timepicker
 
 import android.app.Dialog
 import android.app.TimePickerDialog
