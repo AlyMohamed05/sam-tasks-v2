@@ -3,7 +3,9 @@ package com.udacity.project4.di
 import androidx.room.Room
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.auth.AuthenticatorImpl
+import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.db.SamDB
+import com.udacity.project4.data.repository.TasksLocalDataSource
 import com.udacity.project4.ui.activities.host.HostViewModel
 import com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel
 import com.udacity.project4.ui.fragments.home.HomeViewModel
@@ -34,6 +36,10 @@ val appModule = module {
         samDb.tasksDao
     }
 
+    single<TasksDataSource> {
+        TasksLocalDataSource(get())
+    }
+
     single<DispatchersProvider> {
         object : DispatchersProvider {
             override val main: CoroutineDispatcher
@@ -59,11 +65,11 @@ val appModule = module {
         )
     }
 
-    viewModel{
-        HomeViewModel(get(),get())
+    viewModel {
+        HomeViewModel(get(), get())
     }
 
-    viewModel{
+    viewModel {
         LocationPickerViewModel()
     }
 

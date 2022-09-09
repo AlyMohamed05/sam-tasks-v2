@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.project4.R
 import com.udacity.project4.auth.Authenticator
-import com.udacity.project4.data.db.TasksDao
+import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.models.Task
 import java.util.*
 
-class HomeViewModel (
+class HomeViewModel(
     authenticator: Authenticator,
-    tasksDao: TasksDao
+    tasksRepository: TasksDataSource
 ) : ViewModel() {
 
     val user = authenticator.user
@@ -18,7 +18,7 @@ class HomeViewModel (
     val greetingTextResourceId: Int
         get() = getGreetingTextId()
 
-    val currentTasksList: LiveData<List<Task>> = tasksDao.getTasksLive()
+    val currentTasksList: LiveData<List<Task>> = tasksRepository.getTasksLive()
 
     /**
      * Returns string resource for text shown at top.

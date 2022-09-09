@@ -11,7 +11,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.project4.R
-import com.udacity.project4.data.db.TasksDao
 import com.udacity.project4.data.models.Task
 import com.udacity.project4.receivers.GeofenceBroadcastReceiver
 import com.udacity.project4.utils.DispatchersProvider
@@ -20,13 +19,14 @@ import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.udacity.project4.data.TasksDataSource
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @SuppressLint("UnspecifiedImmutableFlag")
 class CreateTaskViewModel(
     context: Context,
-    private val tasksDao: TasksDao,
+    private val tasksRepository: TasksDataSource,
     private val dispatchersProvider: DispatchersProvider
 ) : ViewModel() {
 
@@ -100,7 +100,7 @@ class CreateTaskViewModel(
             geofenceId = geofenceId
         )
         viewModelScope.launch(dispatchersProvider.main) {
-            tasksDao.upsert(task)
+            tasksRepository.newTask(task)
         }
         _jobFinished.value = true
     }
