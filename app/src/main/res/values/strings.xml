@@ -50,6 +50,7 @@
     <string name="afternoon_greeting">Good Afternoon %s</string>
     <string name="evening_greeting">Good Evening %s</string>
     <string name="night_greeting">Good Night %s</string>
+    <string name="no_data">No Tasks found</string>
 
     <!--    Create Task Fragment-->
     <string name="back_button_description">Go back to home without saving task</string>

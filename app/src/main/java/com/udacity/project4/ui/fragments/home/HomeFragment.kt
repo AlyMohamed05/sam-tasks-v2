@@ -76,6 +76,14 @@ class HomeFragment : Fragment() {
 
             currentTasksList.observe(viewLifecycleOwner) { tasks ->
                 tasksAdapter.submitList(tasks)
+                // show no data indicator if list is empty
+                if(tasks.isEmpty()){
+                    binding.timelineIndicator.visibility = View.INVISIBLE
+                    binding.noDataIndicator.visibility = View.VISIBLE
+                }else{
+                    binding.timelineIndicator.visibility = View.VISIBLE
+                    binding.noDataIndicator.visibility = View.INVISIBLE
+                }
             }
 
         }

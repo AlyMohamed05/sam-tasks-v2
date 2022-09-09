@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
         <View
+            android:id="@+id/timeline_indicator"
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/line_start_margin"
@@ -39,7 +40,6 @@
             app:layout_constraintGuide_percent="0.23" />
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasks_rv"
             android:layout_width="0dp"
@@ -49,6 +49,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+        <!--        Only visible if no tasks-->
+        <TextView
+            android:id="@+id/no_data_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
