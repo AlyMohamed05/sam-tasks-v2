@@ -5,22 +5,19 @@
     android:id="@+id/host_nav_graph"
     app:startDestination="@id/homeFragment">
 
-
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.udacity.project4.ui.fragments.welcome.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/welcome_fragment">
+
         <action
             android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_welcomeFragment_to_authActivity"
-            app:destination="@id/authActivity"
-            app:popUpToInclusive="false" />
+
     </fragment>
 
     <fragment
@@ -28,9 +25,11 @@
         android:name="com.udacity.project4.ui.fragments.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/home_fragment">
+
         <action
             android:id="@+id/action_homeFragment_to_welcomeFragment2"
             app:destination="@id/welcomeFragment" />
+
         <action
             android:id="@+id/action_homeFragment_to_createTaskFragment"
             app:destination="@id/createTaskFragment"
@@ -38,28 +37,26 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/zoom_out_bottom_left" />
-    </fragment>
 
-    <activity
-        android:id="@+id/authActivity"
-        android:name="com.udacity.project4.ui.activities.auth.AuthActivity"
-        android:label="activity_auth"
-        tools:layout="@layout/activity_auth" />
+    </fragment>
 
     <fragment
         android:id="@+id/createTaskFragment"
         android:name="com.udacity.project4.ui.fragments.create_edit.CreateTaskFragment"
         android:label="CreateTaskFragment"
-        tools:layout="@layout/create_task_fragment" >
+        tools:layout="@layout/create_task_fragment">
+
         <action
             android:id="@+id/action_createTaskFragment_to_locationPicker"
             app:destination="@id/locationPicker" />
+
     </fragment>
+
     <fragment
-        tools:layout="@layout/location_picker_fragment"
         android:id="@+id/locationPicker"
         android:name="com.udacity.project4.ui.fragments.location.LocationPicker"
-        android:label="LocationPicker" />
+        android:label="LocationPicker"
+        tools:layout="@layout/location_picker_fragment" />
 
 
 </navigation>

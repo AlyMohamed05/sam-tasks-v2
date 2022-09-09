@@ -4,13 +4,10 @@ import androidx.room.Room
 import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.auth.AuthenticatorImpl
 import com.udacity.project4.data.db.SamDB
-import com.udacity.project4.ui.activities.auth.AuthViewModel
 import com.udacity.project4.ui.activities.host.HostViewModel
 import com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel
 import com.udacity.project4.ui.fragments.home.HomeViewModel
 import com.udacity.project4.ui.fragments.location.LocationPickerViewModel
-import com.udacity.project4.ui.fragments.login.LoginViewModel
-import com.udacity.project4.ui.fragments.signup.SignupViewModel
 import com.udacity.project4.utils.DispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -51,10 +48,6 @@ val appModule = module {
     }
 
     viewModel {
-        AuthViewModel(get())
-    }
-
-    viewModel {
         HostViewModel(get())
     }
 
@@ -68,14 +61,6 @@ val appModule = module {
 
     viewModel{
         HomeViewModel(get(),get())
-    }
-
-    viewModel {
-        LoginViewModel(get(),get())
-    }
-
-    viewModel {
-        SignupViewModel(get(),get())
     }
 
     viewModel{

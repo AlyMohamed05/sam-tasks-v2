@@ -26,10 +26,6 @@
         <receiver android:name="com.udacity.project4.receivers.GeofenceBroadcastReceiver"/>
 
         <activity
-            android:name="com.udacity.project4.ui.activities.auth.AuthActivity"
-            android:exported="false" />
-
-        <activity
             android:name="com.udacity.project4.ui.activities.host.HostActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Splash">
