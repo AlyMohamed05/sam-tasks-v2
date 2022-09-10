@@ -5,8 +5,8 @@ import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.db.SamDB
 import com.udacity.project4.data.repository.TasksLocalDataSource
 import com.udacity.project4.ui.activities.host.HostViewModel
-import com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel
-import com.udacity.project4.ui.fragments.home.HomeViewModel
+import com.udacity.project4.ui.fragments.create_edit.SaveReminderViewModel
+import com.udacity.project4.ui.fragments.home.RemindersListViewModel
 import com.udacity.project4.ui.fragments.location.LocationPickerViewModel
 import com.udacity.project4.utils.DispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
@@ -52,7 +52,7 @@ val appModule = module {
     }
 
     viewModel {
-        CreateTaskViewModel(
+        SaveReminderViewModel(
             androidContext(),
             get(),
             get()
@@ -60,7 +60,7 @@ val appModule = module {
     }
 
     viewModel {
-        HomeViewModel(get())
+        RemindersListViewModel(get())
     }
 
     viewModel {

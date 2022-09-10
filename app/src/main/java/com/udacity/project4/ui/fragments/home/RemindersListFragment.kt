@@ -16,9 +16,9 @@ import com.udacity.project4.ui.fragments.dialogs.TaskDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class HomeFragment : Fragment() {
+class RemindersListFragment : Fragment() {
 
-    private val homeViewModel by viewModel<HomeViewModel>()
+    private val remindersListViewModel by viewModel<RemindersListViewModel>()
 
     private lateinit var binding: HomeFragmentBinding
     private lateinit var tasksAdapter: TasksAdapter
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         )
         binding.greetingText.text =
             getString(
-                homeViewModel.greetingTextResourceId,
+                remindersListViewModel.greetingTextResourceId,
                 FirebaseAuth.getInstance().currentUser?.toUser()?.name ?: ""
             )
         return binding.root
@@ -44,8 +44,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            lifecycleOwner = this@HomeFragment
-            viewModel = homeViewModel
+            lifecycleOwner = this@RemindersListFragment
+            viewModel = remindersListViewModel
             tasksAdapter = TasksAdapter()
             tasksAdapter.setTaskItemCallback { task ->
                 showTaskDialog(task)
@@ -75,11 +75,11 @@ class HomeFragment : Fragment() {
         if (taskId == -1) {
             return
         }
-        homeViewModel.showTask(taskId)
+        remindersListViewModel.showTask(taskId)
     }
 
     private fun observe() {
-        homeViewModel.apply {
+        remindersListViewModel.apply {
 
             currentTasksList.observe(viewLifecycleOwner) { tasks ->
                 tasksAdapter.submitList(tasks)
@@ -96,21 +96,21 @@ class HomeFragment : Fragment() {
             taskFromIntent.observe(viewLifecycleOwner) { task ->
                 if (task != null) {
                     showTaskDialog(task)
-                    homeViewModel.resetTaskFromIntent()
+                    remindersListViewModel.resetTaskFromIntent()
                 }
             }
 
             createNewTask.observe(viewLifecycleOwner) { shouldCreateNewTask ->
                 if (shouldCreateNewTask) {
-                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
-                    homeViewModel.resetCreateNewTaskEvent()
+                    findNavController().navigate(RemindersListFragmentDirections.actionHomeFragmentToCreateTaskFragment())
+                    remindersListViewModel.resetCreateNewTaskEvent()
                 }
             }
 
             showDatePicker.observe(viewLifecycleOwner) { showPicker ->
                 if (showPicker) {
                     showDatePicker()
-                    homeViewModel.resetShowDatePickerEvent()
+                    remindersListViewModel.resetShowDatePickerEvent()
                 }
             }
 

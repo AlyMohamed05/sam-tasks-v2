@@ -10,7 +10,7 @@ import com.udacity.project4.data.models.Task
 import kotlinx.coroutines.launch
 import java.util.*
 
-class HomeViewModel(
+class RemindersListViewModel(
     private val tasksRepository: TasksDataSource
 ) : ViewModel() {
 

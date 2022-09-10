@@ -5,7 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.gms.maps.model.LatLng
 import com.udacity.project4.di.testModule
-import com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel
+import com.udacity.project4.ui.fragments.create_edit.SaveReminderViewModel
 import com.udacity.project4.utils.DispatchersProvider
 import com.udacity.project4.utils.getOrAwaitValue
 import kotlinx.coroutines.CoroutineDispatcher
@@ -50,7 +50,7 @@ class SaveReminderViewModelTest : KoinTest {
                 }
 
                 viewModel {
-                    CreateTaskViewModel(
+                    SaveReminderViewModel(
                         ApplicationProvider.getApplicationContext(),
                         get(),
                         get()
@@ -61,7 +61,7 @@ class SaveReminderViewModelTest : KoinTest {
         )
     }
 
-    private val createTaskViewModel: CreateTaskViewModel by inject()
+    private val createTaskViewModel: SaveReminderViewModel by inject()
 
     @Test
     fun `create task will sets jobFinished value to true`(){

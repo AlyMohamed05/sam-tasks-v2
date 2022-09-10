@@ -10,7 +10,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.udacity.project4.R
 import com.udacity.project4.data.models.Task
 import com.udacity.project4.receivers.GeofenceBroadcastReceiver
 import com.udacity.project4.utils.DispatchersProvider
@@ -24,7 +23,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @SuppressLint("UnspecifiedImmutableFlag")
-class CreateTaskViewModel(
+class SaveReminderViewModel(
     context: Context,
     private val tasksRepository: TasksDataSource,
     private val dispatchersProvider: DispatchersProvider
@@ -93,7 +92,7 @@ class CreateTaskViewModel(
         val task = Task(
             title = title.value!!,
             content = content.value!!,
-            finished = this@CreateTaskViewModel.finished,
+            finished = this@SaveReminderViewModel.finished,
             date = date,
             time = time,
             location = taskLocation.value,
@@ -106,11 +105,11 @@ class CreateTaskViewModel(
     }
 
     fun setDate(date: String) {
-        this@CreateTaskViewModel.date = date
+        this@SaveReminderViewModel.date = date
     }
 
     fun setTime(time: String) {
-        this@CreateTaskViewModel.time = time
+        this@SaveReminderViewModel.time = time
     }
 
     fun setTaskLocation(location: LatLng) {

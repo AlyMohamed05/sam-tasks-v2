@@ -3,7 +3,7 @@ package com.udacity.project4.viewmodels
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.udacity.project4.di.testModule
-import com.udacity.project4.ui.fragments.home.HomeViewModel
+import com.udacity.project4.ui.fragments.home.RemindersListViewModel
 import com.udacity.project4.utils.getOrAwaitValue
 import org.junit.Rule
 import org.junit.Test
@@ -28,16 +28,16 @@ class RemindersListViewModelTest: KoinTest {
         modules(testModule)
     }
 
-    private val homeViewModel: HomeViewModel by inject()
+    private val remindersListViewModel: RemindersListViewModel by inject()
 
     @Test
     fun `sendTaskCreateEvent() updates the livedata value`(){
 
         // When sendTaskCreateEvent() is called on Home View Model
-        homeViewModel.sendCreateTaskEvent()
+        remindersListViewModel.sendCreateTaskEvent()
 
         // Then value of createNewTask livedata should be true
-        val shouldCreateNewTask = homeViewModel.createNewTask.getOrAwaitValue()
+        val shouldCreateNewTask = remindersListViewModel.createNewTask.getOrAwaitValue()
         assertTrue(shouldCreateNewTask)
     }
 
@@ -45,10 +45,10 @@ class RemindersListViewModelTest: KoinTest {
     fun `sendShowDatePickerEvent() updates showDatePicker livedata`(){
 
         // When sendShowDatePickerEvent() is called on homeViewModel
-        homeViewModel.sendShowDatePickerEvent()
+        remindersListViewModel.sendShowDatePickerEvent()
 
         // Then value of showDatePicker should be true
-        val showDatePicker = homeViewModel.showDatePicker.getOrAwaitValue()
+        val showDatePicker = remindersListViewModel.showDatePicker.getOrAwaitValue()
         assertTrue(showDatePicker)
     }
 
@@ -56,15 +56,15 @@ class RemindersListViewModelTest: KoinTest {
     fun `createNewTask value resets when resetCreateNewTaskEvent() is called`(){
 
         // Given that value of createNewTask is true
-        homeViewModel.sendCreateTaskEvent()
-        val shouldCreateNewTask = homeViewModel.createNewTask.getOrAwaitValue()
+        remindersListViewModel.sendCreateTaskEvent()
+        val shouldCreateNewTask = remindersListViewModel.createNewTask.getOrAwaitValue()
         assertTrue(shouldCreateNewTask)
 
         // When resetCreateNewTaskEvent() is called
-        homeViewModel.resetCreateNewTaskEvent()
+        remindersListViewModel.resetCreateNewTaskEvent()
 
         // Then value of createNewTask must be false
-        val currentValue = homeViewModel.createNewTask.getOrAwaitValue()
+        val currentValue = remindersListViewModel.createNewTask.getOrAwaitValue()
         assertFalse(currentValue)
     }
 
@@ -72,15 +72,15 @@ class RemindersListViewModelTest: KoinTest {
     fun `showDatePicker livedata value resets when resetShowDatePickerEvent() is called`(){
 
         // Given that value of showDatePicker is true
-        homeViewModel.sendShowDatePickerEvent()
-        val showDatePicker = homeViewModel.showDatePicker.getOrAwaitValue()
+        remindersListViewModel.sendShowDatePickerEvent()
+        val showDatePicker = remindersListViewModel.showDatePicker.getOrAwaitValue()
         assertTrue(showDatePicker)
 
         // When resetShowDatePickerEvent() is called
-        homeViewModel.resetShowDatePickerEvent()
+        remindersListViewModel.resetShowDatePickerEvent()
 
         // Then value must go back to false
-        val currentValue = homeViewModel.showDatePicker.getOrAwaitValue()
+        val currentValue = remindersListViewModel.showDatePicker.getOrAwaitValue()
         assertFalse(currentValue)
     }
 }

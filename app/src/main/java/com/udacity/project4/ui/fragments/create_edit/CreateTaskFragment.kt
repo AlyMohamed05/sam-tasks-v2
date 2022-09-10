@@ -30,7 +30,7 @@ import timber.log.Timber
 
 class CreateTaskFragment : Fragment() {
 
-    private val createViewModel by viewModel<CreateTaskViewModel>()
+    private val createViewModel by viewModel<SaveReminderViewModel>()
 
     private val requestPermissionHandler =
         registerForActivityResult(

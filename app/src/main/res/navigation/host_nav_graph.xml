@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.udacity.project4.ui.fragments.home.HomeFragment"
+        android:name="com.udacity.project4.ui.fragments.home.RemindersListFragment"
         android:label="Home"
         tools:layout="@layout/home_fragment">
 

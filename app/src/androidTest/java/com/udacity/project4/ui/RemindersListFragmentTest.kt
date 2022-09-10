@@ -21,14 +21,14 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import com.udacity.project4.R
 import com.udacity.project4.di.appModule
-import com.udacity.project4.ui.fragments.home.HomeFragment
-import com.udacity.project4.ui.fragments.home.HomeFragmentDirections
+import com.udacity.project4.ui.fragments.home.RemindersListFragment
+import com.udacity.project4.ui.fragments.home.RemindersListFragmentDirections
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
 @RunWith(AndroidJUnit4::class)
 @MediumTest
-class HomeFragmentTest : KoinTest{
+class RemindersListFragmentTest : KoinTest{
 
     @Before
     fun setup() {
@@ -47,7 +47,7 @@ class HomeFragmentTest : KoinTest{
 
         // Given a Home fragment with mocked nav controller
         val navController = mock(NavController::class.java)
-        val homeFragment = launchFragmentInContainer<HomeFragment>(themeResId = R.style.Theme_SAMTasks)
+        val homeFragment = launchFragmentInContainer<RemindersListFragment>(themeResId = R.style.Theme_SAMTasks)
         homeFragment.onFragment{
             Navigation.setViewNavController(it.requireView(),navController)
         }
@@ -59,7 +59,7 @@ class HomeFragmentTest : KoinTest{
 
         // Then navController should navigate to CreateTaskFragment
         verify(navController).navigate(
-            HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment()
+            RemindersListFragmentDirections.actionHomeFragmentToCreateTaskFragment()
         )
     }
 
@@ -67,7 +67,7 @@ class HomeFragmentTest : KoinTest{
     fun calenderFab_clicked_showDatePicker(){
 
         // Given a Home fragment
-        val homeFragment = launchFragmentInContainer<HomeFragment>(themeResId = R.style.Theme_SAMTasks)
+        val homeFragment = launchFragmentInContainer<RemindersListFragment>(themeResId = R.style.Theme_SAMTasks)
 
         // When clicking on calendar fab
         onView(

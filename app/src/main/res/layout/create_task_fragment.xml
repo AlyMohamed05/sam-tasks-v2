@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.udacity.project4.ui.fragments.create_edit.CreateTaskViewModel" />
+            type="com.udacity.project4.ui.fragments.create_edit.SaveReminderViewModel" />
 
         <variable
             name="fragment"
