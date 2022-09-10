@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
 import com.udacity.project4.databinding.WelcomeFragmentBinding
 import timber.log.Timber
@@ -58,7 +59,9 @@ class WelcomeFragment : Fragment() {
     private fun handleFirebaseSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
-            Timber.d("Logged in")
+            findNavController().navigate(
+                WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
+            )
         } else {
             Timber.d("Handle error")
             Timber.d(response?.error?.errorCode.toString())
