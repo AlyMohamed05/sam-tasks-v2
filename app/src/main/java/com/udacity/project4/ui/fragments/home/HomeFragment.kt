@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.adapters.TasksAdapter
@@ -22,7 +21,6 @@ class HomeFragment : Fragment() {
     private val homeViewModel by viewModel<HomeViewModel>()
 
     private lateinit var binding: HomeFragmentBinding
-    private lateinit var navController: NavController
     private lateinit var tasksAdapter: TasksAdapter
 
     override fun onCreateView(
@@ -40,7 +38,6 @@ class HomeFragment : Fragment() {
                 homeViewModel.greetingTextResourceId,
                 FirebaseAuth.getInstance().currentUser?.toUser()?.name ?: ""
             )
-        navController = findNavController()
         return binding.root
     }
 
@@ -105,7 +102,7 @@ class HomeFragment : Fragment() {
 
             createNewTask.observe(viewLifecycleOwner) { shouldCreateNewTask ->
                 if (shouldCreateNewTask) {
-                    navController.navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
                     homeViewModel.resetCreateNewTaskEvent()
                 }
             }

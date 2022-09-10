@@ -1,9 +1,7 @@
-package com.udacity.project4.date.db
+package com.udacity.project4.data.db
 
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.udacity.project4.data.db.SamDB
-import com.udacity.project4.data.db.TasksDao
 import com.udacity.project4.data.models.Task
 import com.udacity.project4.di.instrumentationTestModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,5 +69,20 @@ class TasksDaoTest : KoinTest {
             tasks = tasksDao.getTasks()
             assertEquals(2, tasks.size)
         }
+    }
+
+    @Test
+    fun gettingTaskById_taskNotFound_returnsNull()= runTest {
+        // Given 3 tasks in table
+        repeat(3){
+            tasksDao.upsert(Task())
+        }
+        assertEquals(3,tasksDao.getTasks().size)
+
+        // When trying to fetch a task by id that doesn't exist
+        val task = tasksDao.getTaskById(1000)
+
+        // Then task must be null
+        assertNull(task)
     }
 }

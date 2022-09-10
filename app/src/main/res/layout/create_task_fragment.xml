@@ -28,7 +28,7 @@
             android:onClick="@{() -> fragment.backWithoutSave()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            android:src="@drawable/ic_back" />
 
         <EditText
             android:id="@+id/title_edit"
@@ -37,11 +37,11 @@
             android:layout_marginHorizontal="@dimen/edit_text_horizontal_margin"
             android:background="@android:color/transparent"
             android:hint="@string/title"
-            android:text="@={viewModel.title}"
             android:importantForAutofill="no"
             android:inputType="text"
             android:minHeight="40dp"
             android:singleLine="true"
+            android:text="@={viewModel.title}"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,11 +56,11 @@
             android:background="#00FFFFFF"
             android:gravity="top|start"
             android:hint="@string/content"
-            android:text="@={viewModel.content}"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:minHeight="60dp"
             android:scrollbars="vertical"
+            android:text="@={viewModel.content}"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/bottom_bar_layout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +77,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@drawable/bottom_bar_card"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/bottom_bar_card"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -92,7 +92,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_calendar" />
+                android:src="@drawable/ic_calendar" />
 
             <ImageButton
                 android:id="@+id/location_button"
@@ -105,7 +105,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/calender_button"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_location" />
+                android:src="@drawable/ic_location" />
 
             <ImageButton
                 android:id="@+id/time_button"
@@ -118,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/location_button"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_clock" />
+                android:src="@drawable/ic_clock" />
 
             <ImageButton
                 android:id="@+id/alarm_button"
@@ -131,7 +131,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/time_button"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_alarm" />
+                android:src="@drawable/ic_alarm" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,9 +141,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:onClick="@{() -> viewModel.createTask()}"
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/done_fab_description"
+            android:onClick="@{() -> viewModel.createTask()}"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottom_bar_layout"
             app:layout_constraintEnd_toEndOf="parent"
