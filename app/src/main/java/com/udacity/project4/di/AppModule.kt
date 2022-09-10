@@ -1,8 +1,6 @@
 package com.udacity.project4.di
 
 import androidx.room.Room
-import com.udacity.project4.auth.Authenticator
-import com.udacity.project4.auth.AuthenticatorImpl
 import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.db.SamDB
 import com.udacity.project4.data.repository.TasksLocalDataSource
@@ -18,10 +16,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-
-    single<Authenticator> {
-        AuthenticatorImpl()
-    }
 
     single {
         Room.databaseBuilder(
@@ -54,7 +48,7 @@ val appModule = module {
     }
 
     viewModel {
-        HostViewModel(get())
+        HostViewModel()
     }
 
     viewModel {
@@ -66,7 +60,7 @@ val appModule = module {
     }
 
     viewModel {
-        HomeViewModel(get(), get())
+        HomeViewModel(get())
     }
 
     viewModel {

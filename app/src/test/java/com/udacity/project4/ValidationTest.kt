@@ -1,12 +1,20 @@
 package com.udacity.project4
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.udacity.project4.utils.ValidationResult
 import com.udacity.project4.utils.validateAsEmail
 import com.udacity.project4.utils.validateAsName
 import com.udacity.project4.utils.validateAsPassword
 import org.junit.Test
 import org.junit.Assert.*
+import org.junit.runner.RunWith
 
+/**
+ * Using Junit runner so all email tests passes,
+ * as email validation uses Patterns to verify the text as email.
+ * ** Removing Junit runner will cause email test validation to fail.
+ */
+@RunWith(AndroidJUnit4::class)
 class ValidationTest {
 
     @Test
@@ -14,6 +22,30 @@ class ValidationTest {
         val emptyText= ""
         val result = emptyText.validateAsEmail()
         assertEquals(ValidationResult.EMPTY,result)
+    }
+
+    @Test
+    fun `invalid email will not pass the validation`(){
+        // Given that email is invalid
+        val email= "invalid@gmail"
+
+        // When validating as email
+        val result = email.validateAsEmail()
+
+        // Then result must be invalid email
+        assertEquals(ValidationResult.EMAIL_NOT_VALID,result)
+    }
+
+    @Test
+    fun `valid email passes the test`(){
+        // Given that the email is valid
+        val email = "test@gmail.com"
+
+        // When validating as email
+        val result = email.validateAsEmail()
+
+        // Then result must be valid
+        assertEquals(ValidationResult.VALID,result)
     }
 
     @Test

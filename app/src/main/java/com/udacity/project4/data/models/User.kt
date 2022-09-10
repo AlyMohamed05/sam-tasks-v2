@@ -1,4 +1,4 @@
-package com.udacity.project4.auth
+package com.udacity.project4.data.models
 
 import android.net.Uri
 import com.google.firebase.auth.FirebaseUser

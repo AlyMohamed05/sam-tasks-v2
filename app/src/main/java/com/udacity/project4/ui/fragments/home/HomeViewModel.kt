@@ -5,28 +5,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.project4.R
-import com.udacity.project4.auth.Authenticator
 import com.udacity.project4.data.TasksDataSource
 import com.udacity.project4.data.models.Task
 import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeViewModel(
-    authenticator: Authenticator,
     private val tasksRepository: TasksDataSource
 ) : ViewModel() {
-
-    val user = authenticator.user
 
     val greetingTextResourceId: Int
         get() = getGreetingTextId()
 
     val currentTasksList: LiveData<List<Task>> = tasksRepository.getTasksLive()
 
+    // LiveData to open task when App starts from a notification.
     private val _taskFromIntent: MutableLiveData<Task?> = MutableLiveData(null)
     val taskFromIntent: LiveData<Task?>
         get() = _taskFromIntent
 
+    private val _createNewTask = MutableLiveData(false)
+    val createNewTask: LiveData<Boolean>
+        get() = _createNewTask
+
+    private val _showDatePicker = MutableLiveData(false)
+    val showDatePicker: LiveData<Boolean>
+        get() = _showDatePicker
 
     fun showTask(taskId: Int) {
         viewModelScope.launch {
@@ -35,8 +39,24 @@ class HomeViewModel(
         }
     }
 
+    fun sendCreateTaskEvent(){
+        _createNewTask.value = true
+    }
+
+    fun sendShowDatePickerEvent(){
+        _showDatePicker.value = true
+    }
+
     fun resetTaskFromIntent() {
         _taskFromIntent.value = null
+    }
+
+    fun resetCreateNewTaskEvent(){
+        _createNewTask.value = false
+    }
+
+    fun resetShowDatePickerEvent(){
+        _showDatePicker.value = false
     }
 
     /**

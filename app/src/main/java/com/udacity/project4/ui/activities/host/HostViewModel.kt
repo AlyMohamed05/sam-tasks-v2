@@ -1,11 +1,10 @@
 package com.udacity.project4.ui.activities.host
 
 import androidx.lifecycle.ViewModel
-import com.udacity.project4.auth.Authenticator
+import com.google.firebase.auth.FirebaseAuth
 
 class HostViewModel(
-    authenticator: Authenticator
 ) : ViewModel() {
 
-    val isSignedIn = authenticator.isSignedIn
+    val isSignedIn = FirebaseAuth.getInstance().currentUser !=null
 }

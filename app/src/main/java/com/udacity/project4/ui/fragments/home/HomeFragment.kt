@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.adapters.TasksAdapter
 import com.udacity.project4.data.models.Task
+import com.udacity.project4.data.models.toUser
 import com.udacity.project4.databinding.HomeFragmentBinding
 import com.udacity.project4.ui.fragments.dialogs.datepicker.DatePickerFragment
 import com.udacity.project4.ui.fragments.dialogs.TaskDialog
@@ -34,7 +36,10 @@ class HomeFragment : Fragment() {
             false
         )
         binding.greetingText.text =
-            getString(homeViewModel.greetingTextResourceId, homeViewModel.user?.name ?: "")
+            getString(
+                homeViewModel.greetingTextResourceId,
+                FirebaseAuth.getInstance().currentUser?.toUser()?.name ?: ""
+            )
         navController = findNavController()
         return binding.root
     }
@@ -43,7 +48,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             lifecycleOwner = this@HomeFragment
-            fragment = this@HomeFragment
+            viewModel = homeViewModel
             tasksAdapter = TasksAdapter()
             tasksAdapter.setTaskItemCallback { task ->
                 showTaskDialog(task)
@@ -59,17 +64,13 @@ class HomeFragment : Fragment() {
         dialog.show(childFragmentManager, "taskFragment")
     }
 
-    fun showDatePicker() {
+    private fun showDatePicker() {
         val pickerFragment = DatePickerFragment()
         // TODO : Handle the date properly
         pickerFragment.setCallback { date ->
             Timber.d(date)
         }
         pickerFragment.show(childFragmentManager, "datePicker")
-    }
-
-    fun openCreateTaskFragment() {
-        navController.navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
     }
 
     private fun checkIntentForTask() {
@@ -99,6 +100,20 @@ class HomeFragment : Fragment() {
                 if (task != null) {
                     showTaskDialog(task)
                     homeViewModel.resetTaskFromIntent()
+                }
+            }
+
+            createNewTask.observe(viewLifecycleOwner) { shouldCreateNewTask ->
+                if (shouldCreateNewTask) {
+                    navController.navigate(HomeFragmentDirections.actionHomeFragmentToCreateTaskFragment())
+                    homeViewModel.resetCreateNewTaskEvent()
+                }
+            }
+
+            showDatePicker.observe(viewLifecycleOwner) { showPicker ->
+                if (showPicker) {
+                    showDatePicker()
+                    homeViewModel.resetShowDatePickerEvent()
                 }
             }
 

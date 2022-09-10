@@ -36,7 +36,7 @@ class CreateTaskViewModel(
     private var date: String? = null
     private var time: String? = null
 
-    private val _taskLocation = MutableLiveData<LatLng?>()
+    private val _taskLocation = MutableLiveData<LatLng?>(null)
     val taskLocation: LiveData<LatLng?>
         get() = _taskLocation
 
@@ -51,7 +51,7 @@ class CreateTaskViewModel(
         get() = _jobFinished
 
     private val sharedPref: SharedPreferences
-    private val geofenceIdKey = context.getString(R.string.geofence_id_key)
+    private val geofenceIdKey = "GEOFENCE_ID"
 
     // Geofencing
     private val geofencingClient: GeofencingClient
@@ -78,7 +78,7 @@ class CreateTaskViewModel(
     init {
         geofencingClient = LocationServices.getGeofencingClient(context)
         sharedPref = context.getSharedPreferences(
-            context.getString(R.string.shared_preferences_name),
+            "sam_preferences",
             Context.MODE_PRIVATE
         )
     }

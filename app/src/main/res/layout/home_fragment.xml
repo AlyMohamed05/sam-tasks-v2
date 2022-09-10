@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="fragment"
-            type="com.udacity.project4.ui.fragments.home.HomeFragment" />
+            name="viewModel"
+            type="com.udacity.project4.ui.fragments.home.HomeViewModel" />
 
     </data>
 
@@ -96,7 +96,7 @@
             android:layout_marginBottom="@dimen/fab_margin"
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/add_fab_description"
-            android:onClick="@{() -> fragment.openCreateTaskFragment()}"
+            android:onClick="@{() -> viewModel.sendCreateTaskEvent()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add" />
@@ -109,7 +109,7 @@
             android:layout_marginBottom="@dimen/fab_margin"
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/calendar_fab_description"
-            android:onClick="@{() -> fragment.showDatePicker()}"
+            android:onClick="@{() -> viewModel.sendShowDatePickerEvent()}"
             app:layout_constraintBottom_toTopOf="@+id/new_task_fab"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_calendar" />
